@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Annonces</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+
+			function getParam(idForm) {
+				var x = document.getElementById(idForm);
+				var params = "{";
+				var i;
+				for (i = 0; i < x.length-1; i++) {
+					params = params + "\"" + x.elements[i].name + "\":\"" + x.elements[i].value + "\"";
+					if(i < x.length-2) params = params + ","; 
+				}
+				params = params + "}";
+
+				return JSON.parse(params);
+			}
+
+			function supprimerAnnonce(formId){
+				var params = getParam(formId);
+				var url = "http://localhost:8080/LPDB_WEB/rest/annonce/deleteAnnonce";
+				jQuery.post(url, params)
+				.always(function(data) {
+					console.log(data);
+					if (data.hasOwnProperty("status")) {
+						if (data.status == 500) {
+							alert("Erreur");
+						} 
+					} else { /* Response 200 */
+						loadAnnonces();
+					}									
+				});
+			}
+
+			function loadAnnonces(){
+				jQuery.get("http://localhost:8080/LPDB_WEB/rest/annonce/getAnnonces", function(data) {
+					var listAnnonces = jQuery("#listAnnonces");
+					listAnnonces.empty();
+					for(var i=0; i < data.length; i++) {
+						var l = document.createElement("li");
+						l.innerHTML = JSON.stringify(data[i]);
+						
+						var b = document.createElement("button");
+						b.innerHTML = "editer";
+						b.type = "submit";
+
+						var supBtn = document.createElement("button");
+						supBtn.innerHTML = "Supprimer";
+						supBtn.type = "submit";
+						
+						var formEdit = document.createElement("form");
+						formEdit.action = "http://localhost:8080/LPDB_WEB/editAnnonce.html";
+						formEdit.method = "GET";
+
+						var formSup = document.createElement("form");
+						formSup.id = "formSup"+i;
+						formSup.action = "javascript:supprimerAnnonce('" + formSup.id + "');";
+						formSup.method = "POST";
+
+						var input = document.createElement("input");
+						input.type = "hidden";
+						input.value = data[i].id;
+						input.name = "ID";
+
+						formEdit.append(b);
+						formEdit.append(input);
+						formSup.append(input);							
+						formSup.append(supBtn);							
+						l.append(formEdit);
+						l.append(formSup);					
+						listAnnonces.append(l);
+					}
+				});
+			}
+			
+			jQuery(document).ready(function() {
+				
+				loadAnnonces();
+				
+				jQuery.get("http://localhost:8080/LPDB_WEB/rest/utilisateur/getUtilisateurs", function(data) {
+					for(var i=0; i < data.length; i++) {
+						var l = document.createElement("li");
+						l.innerHTML = JSON.stringify(data[i]);
+						
+						var b = document.createElement("button");
+						b.innerHTML = "editer";
+						b.type = "submit";
+						
+						var form = document.createElement("form");
+						form.action = "http://localhost:8080/LPDB_WEB/editUtilisateur.html";
+						form.method = "GET";
+
+						var input = document.createElement("input");
+						input.type = "hidden";
+						input.value = data[i].id;
+						input.name = "id";
+
+						form.append(b);
+						form.append(input);
+						l.append(form);
+						jQuery("#listUtilisateurs").append(l);
+					}
+				});			
+			});			
+        </script>
+    </head>
+    <body>
+		<h1> Liste des annonces </h1>
+		<ul id="listAnnonces">
+		</ul>
+		<button onclock="location.href='http://localhost:8080/LPDB_WEB/ajoutAnnonce.html'"> Ajouter une annonce</button>
+		<br/>
+		<h1> Liste des utilisateurs </h1>
+		<ul id="listUtilisateurs">
+		</ul>
+		<br/>
+    </body>
+</html>
+
