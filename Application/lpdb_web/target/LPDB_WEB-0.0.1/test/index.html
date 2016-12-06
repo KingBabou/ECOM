@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript">
+
+			function getParam(idForm) {
+				var x = document.getElementById(idForm);
+				var params = "{";
+				var i;
+				for (i = 0; i < x.length-1; i++) {
+					params = params + "\"" + x.elements[i].name + "\":\"" + x.elements[i].value + "\"";
+					if(i < x.length-2) params = params + ","; 
+				}
+				params = params + "}";
+
+				return JSON.parse(params);
+			}
+
+			function login(){
+				var params = getParam("loginForm");
+				var url = "http://localhost:8080/LPDB_WEB/rest/utilisateur/connexion";
+				jQuery.post(url, params)
+				.always(function(data) {
+					if (data.status == 200) {
+						document.location.href = "http://localhost:8080/LPDB_WEB/annonces.html";
+					} else if (data.status == 404) {
+						alert(data.responseText);
+					}										
+				});
+			}
+
+			function creationPseudo(){
+				var params = getParam("creationForm");
+				var url = "http://localhost:8080/LPDB_WEB/rest/utilisateur/addUtilisateur";
+				jQuery.post(url, params)
+				.always(function(data) {
+					console.log(data);
+					if (data.hasOwnProperty("status")) {
+						if (data.status == 500) {
+							alert(data.responseText);
+						} 
+					} else { /* Response 200 */
+						document.location.href = "http://localhost:8080/LPDB_WEB/annonces.html";
+					}									
+				});
+			}
+			
+        </script>
+    </head>
+    <body>
+        <h1>Thibaut & Juhn = les meilleurs !</h1>
+        <div style="{border: 1px solid black;}">
+			<h2> Login </h2>
+			<form id="loginForm" action="javascript:login();" >
+				Pseudonyme: <input type="text" name="PSEUDONYME"/><br>
+				Mot de passe: <input type="password" name="MDP"/><br>
+				<input type="submit" value="Connexion"/>
+			</form>
+        </div>
+        <div style="{border: 1px solid black;}">
+			<h2> Creation utilisateur </h2>
+			<form id="creationForm" action="javascript:creationPseudo();" >
+				Nom: <input type="text" name="NOM"/><br>
+				Prénom: <input type="text" name="PRENOM"/><br>
+				Adresse: <input type="text" name="ADRESSE"/><br>
+				Pseudonyme: <input type="text" name="PSEUDONYME"/><br>
+				Mot de passe: <input type="password" name="MDP"/><br>
+				<input type="submit" value="Créer"/>
+			</form>
+        </div>
+    </body>
+</html>

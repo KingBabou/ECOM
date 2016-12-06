@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Annonces</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+			function getParam(idForm) {
+				var x = document.getElementById(idForm);
+				var params = "{";
+				var i;
+				for (i = 0; i < x.length-1; i++) {
+					params = params + "\"" + x.elements[i].name + "\":\"" + x.elements[i].value + "\"";
+					if(i < x.length-2) params = params + ","; 
+				}
+				params = params + "}";
+
+				return JSON.parse(params);
+			}
+
+			function modify(){
+				var params = getParam("editForm");
+				var url = "http://localhost:8080/LPDB_WEB/rest/utilisateur/editUtilisateur";
+				jQuery.post(url, params)
+				.always(function(data) {
+					console.log(data);
+					if (data.hasOwnProperty("status")) {
+						if (data.status == 500) {
+							alert("Mauvais pseudo");
+						} 
+					} else { /* Response 200 */
+						document.location.href = "http://localhost:8080/LPDB_WEB/annonces.html";
+					}									
+				});
+			}
+        </script>
+    </head>
+    <body>
+		<div style="{border: 1px solid black;}">
+			<h2> Profile </h2>
+			<form id="editForm" action="javascript:modify();" >
+				Pseudo: <input type="text" name="PSEUDONYME"/><br>
+				Nouveau Nom: <input type="text" name="NEW_NOM"/><br>
+				Nouveau Prénom: <input type="text" name="NEW_PRENOM"/><br>
+				Nouveau Adresse: <input type="text" name="NEW_ADRESSE"/><br>
+				Nouveau Pseudonyme: <input type="text" name="NEW_PSEUDONYME"/><br>
+				Nouveau Mot de passe: <input type="password" name="NEW_MDP"/><br>
+				<input type="submit" value="Modifier"/>
+			</form>
+        </div>
+    </body>
+</html>
+
