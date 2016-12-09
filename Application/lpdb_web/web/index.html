@@ -1,448 +1,474 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="">
-      <meta name="author" content="Dashboard">
-      <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-      <title>Le pays du bazard</title>
-      <!-- Bootstrap core CSS -->
-      <link href="assets/css/bootstrap.css" rel="stylesheet">
-      <!--external css-->
-      <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-      <link rel="stylesheet" type="text/css" href="assets/css/search.css">
-      <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
-      <link rel="stylesheet" type="text/css" href="assets/css/profil.css">
-      <!-- Custom styles for this template -->
-      <link href="assets/css/style.css" rel="stylesheet">
-      <link href="assets/css/style-responsive.css" rel="stylesheet">
-      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script> 
-      <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jqc-1.12.3/dt-1.10.12/datatables.min.js"></script>
-      <script src="assets/js/chart-master/Chart.js"></script>
-      <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jqc-1.12.3/dt-1.10.12/datatables.min.js"></script>
-      <script type="text/javascript" src="assets/js/lpdb/annonces.js"></script>
-      <script type="text/javascript" src="assets/js/lpdb/utilisateurs.js"></script>
-      <script type="text/javascript" src="assets/js/lpdb/cookie.js"></script>
-      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-      <!--[if lt IE 9]>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <title>Le pays du bazard</title>
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="assets/css/search.css">
+    <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/profil.css">
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jqc-1.12.3/dt-1.10.12/datatables.min.js"></script>
+    <script src="assets/js/chart-master/Chart.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jqc-1.12.3/dt-1.10.12/datatables.min.js"></script>
+    <script type="text/javascript" src="assets/js/lpdb/annonces.js"></script>
+    <script type="text/javascript" src="assets/js/lpdb/utilisateurs.js"></script>
+    <script type="text/javascript" src="assets/js/lpdb/cookie.js"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
 
-      
-   </head>
-   <body>
-      <section id="container" >
-         <!-- **********************************************************************************************************************************************************
+
+</head>
+
+<body>
+    <section id="container">
+        <!-- **********************************************************************************************************************************************************
             TOP BAR CONTENT & NOTIFICATIONS
             *********************************************************************************************************************************************************** -->
-         <!--header start-->
-         <header class="header black-bg">
-            <div class="sidebar-toggle-box">
-               <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+        <!--header start-->
+        <header class="header black-bg">
+			<div class="col-sm-4">
+				<div class="sidebar-toggle-box">
+					<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+				</div>
+				<!--logo start-->
+				<a href="index.html" class="logo"><b>Le pays du bazard</b></a>
+				<!--logo end-->
             </div>
-            <!--logo start-->
-            <a href="index.html" class="logo"><b>Le pays du bazard</b></a>
-            <!--logo end-->
-            <div class="nav notify-row" id="top_menu">
-               <!-- settings start -->
-               <div class="container">
-                  <div class="row">
-                     <div class="col-md-12">
-                        <div class="input-group" id="adv-search">
-                           <input type="text" class="form-control" placeholder="Recherchez une offre" />
-                           <div class="input-group-btn">
-                              <div class="btn-group" role="group">
-                                 <div class="dropdown dropdown-lg">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                       <form class="form-horizontal" role="form">
-                                          <div class="form-group">
-                                             <label for="filter">Filtrer par</label>
-                                             <select class="form-control">
-                                                <option value="1">Prix</option>
-                                                <option value="2">Utilisateur</option>
-                                                <option value="3">Date</option>
-                                             </select>
-                                          </div>
-                                          <div class="form-group">
-                                             <label for="filter">Région</label>
-                                             <select class="form-control">
-                                                <option value="0" selected>Toutes les régions</option>
-                                                <option value="1">Ile de France</option>
-                                                <option value="2">Rhone Alpes</option>
-                                                <option value="3">PACA</option>
-                                             </select>
-                                          </div>
-                                          <div class="form-group">
-                                             <label for="filter">Département</label>
-                                             <select class="form-control">
-                                                <option value="0" selected>Tout les départements</option>
-                                                <option value="1">Isère</option>
-                                                <option value="2">Savoie</option>
-                                                <option value="3">Chez Julian</option>
-                                             </select>
-                                          </div>
-                                          <div class="form-group">
-                                             <label for="contain">
-                                             Type
-                                             </label>
-                                             <input class="form-control" type="text" />
-                                          </div>
-                                          <div class="form-group">
-                                             <label for="contain">
-                                             Mots clés
-                                             </label>
-                                             <input class="form-control" type="text" />
-                                          </div>
-                                          <label for="contain">
-                                          Prix
-                                          </label>
-                                          <input class="form-control" type="number" placeholder="Prix min" pattern="\d*"/>
-                                          <input class="form-control" type="number" placeholder="Prix max" pattern="\d*"/>
+            <div class="col-sm-4" id="top_menu">
+                <!-- settings start -->
+                <div>
+                    <div>
+                        <div style="padding-top:2.5%">
+                            <div class="input-group" id="adv-search">
+                                <input type="text" class="form-control" placeholder="Recherchez une offre" />
+                                <div class="input-group-btn">
+                                    <div class="btn-group" role="group">
+                                        <div class="dropdown dropdown-lg">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                                <form class="form-horizontal" role="form">
+                                                    <div class="form-group">
+                                                        <label for="filter">Filtrer par</label>
+                                                        <select class="form-control">
+															<option value="1">Prix</option>
+															<option value="2">Utilisateur</option>
+															<option value="3">Date</option>
+														 </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="filter">Région</label>
+                                                        <select class="form-control">
+															<option value="0" selected>Toutes les régions</option>
+															<option value="1">Ile de France</option>
+															<option value="2">Rhone Alpes</option>
+															<option value="3">PACA</option>
+														</select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="filter">Département</label>
+                                                        <select class="form-control">
+															<option value="0" selected>Tout les départements</option>
+															<option value="1">Isère</option>
+															<option value="2">Savoie</option>
+															<option value="3">Chez Julian</option>
+														 </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="contain">
+														 Type
+														 </label>
+                                                        <input class="form-control" type="text" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="contain">
+														 Mots clés
+														 </label>
+                                                        <input class="form-control" type="text" />
+                                                    </div>
+                                                    <label for="contain">
+													  Prix
+													</label>
+                                                    <input class="form-control" type="number" placeholder="Prix min" pattern="\d*" />
+                                                    <input class="form-control" type="number" placeholder="Prix max" pattern="\d*" />
+												</div>
+                                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                    </form>
-                                 </div>
-                              </div>
-                           </div>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-               </div>
+                    </div>
+                </div>
             </div>
             <!--  notification end -->
             </div>
-            <div class="top-menu">
-               <ul class="nav pull-right top-menu">
-                  <li><button type="button" class="logout" data-toggle="modal" data-target="#myModal">Ajouter une annonce</button></li>
-                  <li><button id="btnLogin" type="button" class="logout" data-toggle="modal" data-target="#myModal2"></button></li>
-                  <script type="text/javascript">
-					  document.getElementById("btnLogin").innerHTML = readCookie("connected")=="true" ? "Logout" : "Login";
-					  $("#btnLogin").on( "click", function(e) {
-						  if(readCookie("connected") != null && readCookie("connected") =="true" ){
-							  $("#myModal2").modal('hide');
-							  createCookie("connected", false, 0);
-							  $(this).text("Login");
-						  } else {
-							  $(this).text("Logout");
-						  }
-						  
-						});
-				  </script>
-					  
-               </ul>
+            <div class="col-sm-4">
+                <ul class="nav pull-right top-menu">
+                    <li><button id="btnAddAnnonce" type="button" class="logout" data-toggle="modal" data-target="#myModal">Ajouter une annonce</button></li>
+                    <li><button id="btnLogin" type="button" class="logout"></button></li>
+                    <script type="text/javascript">
+                        document.getElementById("btnLogin").innerHTML = readCookie("connected") == "true" ? "Logout" : "Login";
+                        
+                        //show edit annonce if not connected
+                        if (readCookie("connected") != null && readCookie("connected") == "true") {
+                            $("#btnAddAnnonce").show();
+                        } else {
+                            $("#btnAddAnnonce").hide();
+                        }
+
+                        //open modal window to connect of not connected
+                        $("#btnLogin").on("click", function(e) {
+							if (readCookie("connected") != null && readCookie("connected") == "true") {
+								//Logout
+								$("#myModal2").modal('hide');
+								$("#btnAddAnnonce").hide();
+								createCookie("connected", false, 0);
+								$(this).text("Login");
+							} else {
+								$("#myModal2").modal('show');
+								
+								$("#headerConnexion").show();
+								$("#inscrireButton").show();
+								$("#formConnexion").show();
+								$("#bottom").show();
+								$("#headerInscription").hide();
+								$("#formInscription").hide();
+
+								$("#formInscription")[0].reset();
+								$("#formConnexion")[0].reset();
+								
+							}
+
+                        });
+                    </script>
+
+                </ul>
             </div>
-         </header>
-         <!--header end-->
-         <!-- **********************************************************************************************************************************************************
+        </header>
+        <!--header end-->
+        <!-- **********************************************************************************************************************************************************
             MAIN SIDEBAR MENU
             *********************************************************************************************************************************************************** -->
-         <!--sidebar start-->
-         <aside>
-            <div id="sidebar"class="nav-collapse ">
-               <!-- sidebar menu start-->
-               <ul class="sidebar-menu" id="nav-accordion">
-                  <p class="centered">
-                     <a class="active" data-toggle="modal" data-target="#myModalUser"><img src="assets/img/marechal.png" class="img-circle" width="60"></a>
-                  </p>
-                  <h5 class="centered">
-                     Edwin Niogret
-                  </h5>
-                  <li class="mt">
-                     <a class="active" data-toggle="modal" data-target="#myModalUser">
-                     <i class="fa fa-user"></i>
-                     <span>
-                     Profil
-                     </span>
-                     </a>
-                  </li>
-               </ul>
-               <!-- sidebar menu end-->
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu" id="nav-accordion">
+                    <p class="centered">
+                        <a class="active" data-toggle="modal" data-target="#myModalUser"><img src="assets/img/marechal.png" class="img-circle" width="60"></a>
+                    </p>
+                    <h5 class="centered">
+                        Edwin Niogret
+                    </h5>
+                    <li class="mt">
+                        <a class="active" data-toggle="modal" data-target="#myModalUser">
+                            <i class="fa fa-user"></i>
+                            <span>
+							 Profil
+							</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- sidebar menu end-->
             </div>
-         </aside>
-         <!--sidebar end-->
-         <!-- **********************************************************************************************************************************************************
+        </aside>
+        <!--sidebar end-->
+        <!-- **********************************************************************************************************************************************************
             MAIN CONTENT
             *********************************************************************************************************************************************************** -->
-         <!--main content start-->
-         <section id="main-content">
+        <!--main content start-->
+        <section id="main-content">
             <section class="wrapper">
-               <table id="list" class="table table-striped table-bordered" width="100%" cellspacing="0">
-               </table>
-               <a href="#" id="next">
+                <table id="list" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                </table>
+                <a href="#" id="next">
                NEXT
                </a>
             </section>
-         </section>
-         <script type="text/javascript">
-
-			$(document).ready(function(){
-				loadAnnonces("list",0);
-			});
-
-            
-            
-            $("#next").click(function() {
-            	// display next elements
-            	displayNext();
+        </section>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                loadAnnonces("list", 0);
             });
-            
+
+
+
+            $("#next").click(function() {
+                // display next elements
+                displayNext();
+            });
+
             function displayNext() {
-				loadAnnonces("list",currentIndex+nbLines);
+                loadAnnonces("list", currentIndex + nbLines);
             }
-         </script>
+        </script>
 
-         <!--main content end-->
-         <!--footer start-->
-         <footer class="site-footer">
+        <!--main content end-->
+        <!--footer start-->
+        <footer class="site-footer">
             <div class="text-center">
-               2016 - NIOGRET-NOUGIER-RAMEL-HATTINGUAIS
-               <a href="index.html#" class="go-top">
-               <i class="fa fa-angle-up"></i>
-               </a>
+                2016 - NIOGRET-NOUGIER-RAMEL-HATTINGUAIS
+                <a href="index.html#" class="go-top">
+                    <i class="fa fa-angle-up"></i>
+                </a>
             </div>
-         </footer>
-         <!--footer end-->
-      </section>
+        </footer>
+        <!--footer end-->
+    </section>
 
 
-<!--Fenêtres modales-->
+    <!--Fenêtres modales-->
 
-      <!-- myModal -->
-	  
-      <div  aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
-         <div class="modal-dialog">
+    <!-- myModal -->
+
+    <div aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+        <div class="modal-dialog">
             <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Ajouter une annonce</h4>
-               </div>
-               <div class="modal-body">
-                  <h4>Titre de l'annonce</h4>
-                  <input type="text" name="email" autocomplete="off" class="form-control placeholder-no-fix">
-                  <h4>Prix</h4>
-                  <input type="number" name="quantity" min="1" max="1000000">
-                  <h4>Image</h4>
-                  <input type="file" name="fileupload" value="fileupload" id="fileupload">
-                  <label for="fileupload"> Sélectionner une image</label>
-                  <h4>Description</h4>
-                  <textarea rows="4" cols="50"></textarea>
-               </div>
-               <div class="modal-footer">
-                  <button data-dismiss="modal" class="btn btn-default" type="button">Annuler</button>
-                  <button class="btn btn-theme" type="button">Publier mon annonce</button>
-               </div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ajouter une annonce</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>Titre de l'annonce</h4>
+                    <input type="text" name="email" autocomplete="off" class="form-control placeholder-no-fix">
+                    <h4>Prix</h4>
+                    <input type="number" name="quantity" min="1" max="1000000">
+                    <h4>Image</h4>
+                    <input type="file" name="fileupload" value="fileupload" id="fileupload">
+                    <label for="fileupload"> Sélectionner une image</label>
+                    <h4>Description</h4>
+                    <textarea rows="4" cols="50"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Annuler</button>
+                    <button class="btn btn-theme" type="button">Publier mon annonce</button>
+                </div>
             </div>
-         </div>
-      </div>
-      <!-- fin myModal -->
-	  
-	  <!-- myModalAnnonce -->
-<div  aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="my_modalAnnonce" class="modal fade"> 
-  <div class="modal-dialog">
-    <div class="modal-content">
-     <div class="modal-header">
-                  <h4 class="modal-title titreAnnonce " id="titre">Ajouter une annonce</h4>
-               </div>
-      <div class="modal-body modal-bodyAnnonce">
-  					<div id="annonceHeader">
-
-						<button  class="btn btn-theme" data-dismiss="modal" aria-label="Close">Retour aux annonces</button>
-
-				
-
-					</div>
-					<div class="cadres">
-						<div class="description" id="desc">
-							Description
-						</div>
-						<div class="vendImg">
-							<div class="vendeur" id="vend">
-								vendeur
-							</div>
-							<div class="img" id="img">
-								image
-							</div>
-													<div class="prix" id="prixAnnonce">
-							Prix de l'annonce
-						</div>	
-						</div>
-					</div>
-      </div>
+        </div>
     </div>
-  </div>
-</div>
+    <!-- fin myModal -->
 
-	  <!-- fin myModalAnnonce -->
-
-      <!-- myModalUser -->
-
-      <div  aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModalUser" class="modal fade">
-         <div class="modal-dialog">
+    <!-- myModalAnnonce -->
+    <div aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="my_modalAnnonce" class="modal fade">
+        <div class="modal-dialog">
             <div class="modal-content">
-               <div >
-                  <div class="card hovercard">
-                     <div class="card-background">
-                        <img class="card-bkimg" alt="" src="http://lorempixel.com/100/100/people/9/">
-                        <!-- http://lorempixel.com/850/280/people/9/ -->
-                     </div>
-                     <div class="useravatar">
-                        <img alt="" src="http://lorempixel.com/100/100/people/9/" id = "blah">
-                     </div>
-                     <div class="card-info"> <span class="card-title">Pamela Anderson</span>
-                     </div>
-                  </div>
-                  <form id="form1" runat="server">
-                     <input type='button' id='remove' value='remove' class='hide'/>
-                     <input type='file' id="imgInp" /><br>
-                  </form>
-                  <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-                     <div class="btn-group" role="group">
-                        <button type="button" id="b1" class="btn btn-primary" href="#tab1" data-toggle="tab">
+                <div class="modal-header">
+                    <h4 class="modal-title titreAnnonce " id="titre">Ajouter une annonce</h4>
+                </div>
+                <div class="modal-body modal-bodyAnnonce">
+                    <div id="annonceHeader">
+
+                        <button class="btn btn-theme" data-dismiss="modal" aria-label="Close">Retour aux annonces</button>
+
+
+
+                    </div>
+                    <div class="cadres">
+                        <div class="description" id="desc">
+                            Description
+                        </div>
+                        <div class="vendImg">
+                            <div class="vendeur" id="vend">
+                                vendeur
+                            </div>
+                            <div class="img" id="img">
+                                image
+                            </div>
+                            <div class="prix" id="prixAnnonce">
+                                Prix de l'annonce
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- fin myModalAnnonce -->
+
+    <!-- myModalUser -->
+
+    <div aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModalUser" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div>
+                    <div class="card hovercard">
+                        <div class="card-background">
+                            <img class="card-bkimg" alt="" src="http://lorempixel.com/100/100/people/9/">
+                            <!-- http://lorempixel.com/850/280/people/9/ -->
+                        </div>
+                        <div class="useravatar">
+                            <img alt="" src="http://lorempixel.com/100/100/people/9/" id="blah">
+                        </div>
+                        <div class="card-info"> <span class="card-title">Pamela Anderson</span>
+                        </div>
+                    </div>
+                    <form id="form1" runat="server">
+                        <input type='button' id='remove' value='remove' class='hide' />
+                        <input type='file' id="imgInp" /><br>
+                    </form>
+                    <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" id="b1" class="btn btn-primary" href="#tab1" data-toggle="tab">
                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                            <div class="hidden-xs">Général</div>
                         </button>
-                     </div>
-                     <div class="btn-group" role="group">
-                        <button type="button" id="b2" class="btn btn-default" href="#tab2" data-toggle="tab">
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" id="b2" class="btn btn-default" href="#tab2" data-toggle="tab">
                            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
                            <div class="hidden-xs">Mes annonces</div>
                         </button>
-                     </div>
-                     <div class="btn-group" role="group">
-                        <button type="button" id="b3" class="btn btn-default" href="#tab3" data-toggle="tab">
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" id="b3" class="btn btn-default" href="#tab3" data-toggle="tab">
                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                            <div class="hidden-xs">Editer mon profil</div>
                         </button>
-                     </div>
-                  </div>
-                  <div class="well">
-                     <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab1">
-                           <table class="table table-user-information">
-                              <tbody>
-                                 <tr class="coord">
-                                    <td bgcolor="F2F2F2">Coordonnées:</td>
-                                    <td contenteditable='false' bgcolor="F2F2F2">Programming</td>
-                                 </tr>
-                              </tbody>
-                           </table>
                         </div>
-                        <div class="tab-pane fade in" id="tab2">
-                           <h3>This is tab 2</h3>
+                    </div>
+                    <div class="well">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab1">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                        <tr class="coord">
+                                            <td bgcolor="F2F2F2">Coordonnées:</td>
+                                            <td contenteditable='false' bgcolor="F2F2F2">Programming</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade in" id="tab2">
+                                <h3>This is tab 2</h3>
+                            </div>
+                            <div class="tab-pane fade in" id="tab3">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                        <tr class="coord">
+                                            <td bgcolor="#F2F2F2">Coordonnées:</td>
+                                            <td class="edit" contenteditable='false' bgcolor="#F2F2F2">Programming</td>
+                                        </tr>
+                                        <tr class="mdp" style="display: none;">
+                                            <td bgcolor="#F2F2F2">Mot de passe actuel:</td>
+                                            <td class="edit" contenteditable='false' bgcolor="#F2F2F2"><input type="password" name="psw"></td>
+                                        </tr>
+                                        <tr class="mdp" style="display: none;">
+                                            <td bgcolor="#F2F2F2">Nouveau mot de passe:</td>
+                                            <td class="edit" contenteditable='false' bgcolor="#F2F2F2"><input type="password" name="psw"></td>
+                                        </tr>
+                                        <tr class="mdp" style="display: none;">
+                                            <td bgcolor="#F2F2F2">Veuillez confirmer le nouveau mot de passe:</td>
+                                            <td class="edit" contenteditable='false' bgcolor="#F2F2F2"><input type="password" name="psw"></td>
+                                        </tr>
+                                        <input id="EditableButton" type="button" value="Editer coordonnées" />
+                                        <input id="MdpButton" type="button" value="Editer mot de passe" />
+                                        <input id="SaveButton" type="button" value="Sauvegarder" hidden="hidden" />
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div class="tab-pane fade in" id="tab3">
-                           <table class="table table-user-information">
-                              <tbody>
-                                 <tr class="coord">
-                                    <td bgcolor="#F2F2F2">Coordonnées:</td>
-                                    <td class="edit" contenteditable='false' bgcolor="#F2F2F2">Programming</td>
-                                 </tr>
-                                 <tr class="mdp" style="display: none;">
-                                    <td bgcolor="#F2F2F2">Mot de passe actuel:</td>
-                                    <td class="edit" contenteditable='false' bgcolor="#F2F2F2"><input type="password" name="psw"></td>
-                                 </tr>
-                                 <tr class="mdp" style="display: none;">
-                                    <td bgcolor="#F2F2F2">Nouveau mot de passe:</td>
-                                    <td class="edit" contenteditable='false' bgcolor="#F2F2F2"><input type="password" name="psw"></td>
-                                 </tr>
-                                 <tr class="mdp" style="display: none;">
-                                    <td bgcolor="#F2F2F2">Veuillez confirmer le nouveau mot de passe:</td>
-                                    <td class="edit" contenteditable='false' bgcolor="#F2F2F2"><input type="password" name="psw"></td>
-                                 </tr>
-                                 <input id="EditableButton" type="button" value="Editer coordonnées"  />
-                                 <input id="MdpButton" type="button" value="Editer mot de passe"  />
-                                 <input id="SaveButton" type="button" value="Sauvegarder" hidden="hidden" />
-                              </tbody>
-                           </table>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="modal-body">
-               </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                </div>
             </div>
-         </div>
-      </div>
-      <!-- fin myModalUser -->
+        </div>
+    </div>
+    <!-- fin myModalUser -->
 
-      <!-- Modal2 -->
+    <!-- Modal2 -->
 
-      <div  aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal2" class="modal fade">
-         <div class="modal-dialog">
+    <div aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal2" class="modal fade">
+        <div class="modal-dialog">
             <div class="modal-body">
-               <div class="form-login" >
-                  <h2 id="headerConnexion" class="form-login-heading" style= "display: block;">Connectez-vous maintenant</h2>
-                  <h2 id="headerInscription" class="form-login-heading" style= "display: none;">Inscrivez-vous maintenant</h2>
-                  <div class="login-wrap">
+                <div class="form-login">
+                    <h2 id="headerConnexion" class="form-login-heading" style="display: block;">Connectez-vous maintenant</h2>
+                    <h2 id="headerInscription" class="form-login-heading" style="display: none;">Inscrivez-vous maintenant</h2>
+                    <div class="login-wrap">
 
-					 
-					  <form id="formConnexion" method="POST" action="javascript:connect('formConnexion');">
-						 <input name="PSEUDONYME" type="text" class="form-control" placeholder="Pseudo" autofocus><br>						
-						 <input name="MDP" type="password" class="form-control" placeholder="Mot de passe" class="inscrire" autofocus><br>
-						 <label class="checkbox">
-						 <span class="pull-right">
-						 <a data-toggle="modal" class="toHide" href="login.html#myModal3"> Mot de passe oublié ?</a>
-						 </span>
-						 </label>
-                        <button class="btn btn-theme btn-block toHide" href="index.html" type="submit"><i class="fa fa-lock"></i> Se connecter</button>
-					  </form>
-					  <form id="formInscription" method="POST" action="javascript:createUser('formInscription');" style="display:none;">
-						 <input type="text" name="PSEUDONYME" class="form-control inscrire" placeholder="Pseudo" autofocus><br>
-						 <input type="text" name="NOM" class="form-control inscrire" placeholder="Nom" autofocus><br>
-						 <input type="text" name="PRENOM" class="form-control inscrire" placeholder="Prénom" autofocus><br>						 
-						 <input type="password" name="MDP" class="form-control inscrire" placeholder="Mot de passe" class="inscrire" autofocus><br>
-						 <input type="password" class="form-control inscrire" placeholder="Confirmez votre mot de passe" class="inscrire" autofocus><br>
-						 <input type="text" name="ADRESSE" class="form-control inscrire" placeholder="Adresse" class="inscrire" autofocus><br>
-						 <button class="btn btn-theme btn-block inscrire" id = "inscrireButton2" type="submit"><i class="fa fa-lock"></i>S'inscrire</button>
-					  </form>
 
-                     <div id="bottom">
-						 <hr class = "toHide" style = "display : block;">
-						 <div class="registration toHide" style = "display : block;">
-							Vous n'avez pas encore de compte ?<br/> <br/>
-							<button class="btn btn-theme btn-block" id = "inscrireButton" type="button" <i class="fa fa-lock"></i>S'inscrire</button>
-						 </div>
-                     </div>
-                                          
-                  </div>
-                  <!-- Modal3 -->
-                  <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal3" class="modal fade">
-                     <div class="modal-dialog">
-                        <div class="modal-content">
-                           <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                              <h4 class="modal-title">Mot de passe oublié ?</h4>
-                           </div>
-                           <div class="modal-body">
-                              <p>Entre votre mot de passe çi-dessous pour réinitialiser votre mot de passe.</p>
-                              <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
-                           </div>
-                           <div class="modal-footer">
-                              <button data-dismiss="modal" class="btn btn-default" type="button">Annuler</button>
-                              <button class="btn btn-theme" type="button">Envoyer</button>
-                           </div>
+                        <form id="formConnexion" method="POST" action="javascript:connection('formConnexion');">
+                            <input name="PSEUDONYME" type="text" class="form-control" placeholder="Pseudo" autofocus><br>
+                            <input name="MDP" type="password" class="form-control" placeholder="Mot de passe" class="inscrire" autofocus><br>
+                            <label class="checkbox">
+							<span class="pull-right">
+							<a data-toggle="modal" class="toHide" href="login.html#myModal3"> Mot de passe oublié ?</a>
+							</span>
+							</label>
+                            <button class="btn btn-theme btn-block toHide" href="index.html" type="submit"><i class="fa fa-lock"></i> Se connecter</button>
+                        </form>
+                        <form id="formInscription" method="POST" action="javascript:creationUser('formInscription');" style="display:none;">
+                            <input type="text" name="PSEUDONYME" class="form-control inscrire" placeholder="Pseudo" autofocus><br>
+                            <input type="text" name="NOM" class="form-control inscrire" placeholder="Nom" autofocus><br>
+                            <input type="text" name="PRENOM" class="form-control inscrire" placeholder="Prénom" autofocus><br>
+                            <input type="password" name="MDP" class="form-control inscrire" placeholder="Mot de passe" class="inscrire" autofocus><br>
+                            <input type="password" class="form-control inscrire" placeholder="Confirmez votre mot de passe" class="inscrire" autofocus><br>
+                            <input type="text" name="ADRESSE" class="form-control inscrire" placeholder="Adresse" class="inscrire" autofocus><br>
+                            <button class="btn btn-theme btn-block inscrire" id="inscrireButton2" type="submit"><i class="fa fa-lock"></i>S'inscrire</button>
+                        </form>
+
+                        <div id="bottom">
+                            <hr class="toHide" style="display : block;">
+                            <div class="registration toHide" style="display : block;">
+                                Vous n'avez pas encore de compte ?<br/> <br/>
+                                <button class="btn btn-theme btn-block" id="inscrireButton" type="button" <i class="fa fa-lock"></i>S'inscrire</button>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <!-- Fin Modal3 -->
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- Fin Modal2 -->
 
-	<!--Fin Fenêtres modales-->
-	
-      <!-- js placed at the end of the document so the pages load faster -->
-      <script src="assets/js/jquery.js"></script>
-      <script src="assets/js/bootstrap.min.js"></script>
-      <!--BACKSTRETCH-->
-      <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
-      <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
-          <!-- js placed at the end of the document so the pages load faster -->
+                    </div>
+                    <!-- Modal3 -->
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal3" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Mot de passe oublié ?</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Entre votre mot de passe çi-dessous pour réinitialiser votre mot de passe.</p>
+                                    <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Annuler</button>
+                                    <button class="btn btn-theme" type="button">Envoyer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fin Modal3 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal2 -->
+
+    <!--Fin Fenêtres modales-->
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!--BACKSTRETCH-->
+    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+    <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
+    <!-- js placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/jquery-1.8.3.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
@@ -450,188 +476,221 @@
     <script src="assets/js/jquery.scrollTo.min.js"></script>
     <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
     <script src="assets/js/jquery.sparkline.js"></script>
-      
-        <!-- js placed at the end of the document so the pages load faster -->
-      <script src="assets/js/jquery.js"></script>
-      <script src="assets/js/jquery-1.8.3.min.js"></script>
-      <script src="assets/js/bootstrap.min.js"></script>
-      <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
-      <script src="assets/js/jquery.scrollTo.min.js"></script>
-      <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-      <script src="assets/js/jquery.sparkline.js"></script>
-      <!--common script for all pages-->
-      <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/jquery-1.8.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="assets/js/jquery.scrollTo.min.js"></script>
+    <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="assets/js/jquery.sparkline.js"></script>
+    <!--common script for all pages-->
+    <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
 
 
-      
-      <script type="application/javascript">
-         $(document).ready(function () {
-                     $("#date-popover").popover({html: true, trigger: "manual"});
+
+    <script type="application/javascript">
+        $(document).ready(function() {
+            $("#date-popover").popover({
+                html: true,
+                trigger: "manual"
+            });
             $("#date-popover").hide();
-            $("#date-popover").click(function (e) {
+            $("#date-popover").click(function(e) {
                 $(this).hide();
             });
-         
-         
-         $('#inscrireButton').click(function(){
-			 $(this).hide();
 
-			 $("#formConnexion").hide();
-			 $("#headerConnexion").hide();
-			 $("#formInscription").show();
-			 $("#headerInscription").show();        
-			 $("#bottom").hide();        
-         
-         
-         
-         });
-         
-         $('#EditableButton').click(function(){
-         $(this).hide();
-         document.getElementById("b1").disabled = true; 
-         document.getElementById("b2").disabled = true; 
-         document.getElementById("b3").disabled = true; 
-         
-         $('#SaveButton').show();
-         $('#MdpButton').hide();
-         $(".edit").each(function() {
-			 $( this ).attr("contenteditable","true");
-			 $( this ).attr("bgcolor","#FFFFFF");
-			 });
-         });
-         
-         $('#SaveButton').click(function(){
-         $(this).hide();
-         $('#EditableButton').show();
-         $('#MdpButton').show();
-         document.getElementById("b1").disabled = false; 
-         document.getElementById("b2").disabled = false; 
-         document.getElementById("b3").disabled = false; 
-         $(".edit").each(function() {
-			 $( this ).attr("contenteditable","false");
-			 $( this ).attr("bgcolor","#F2F2F2");
-         });
-         
-         $(".coord").each(function() {
-			 $( this ).attr("style","display: block;");
-			 
-         });
-         $(".mdp").each(function() {
-			 $( this ).attr("style","display: none;");
-			 
-         });
-         });
-         
-         
-         $('#MdpButton').click(function(){
-         $(this).hide();
-         document.getElementById("b1").disabled = true; 
-         document.getElementById("b2").disabled = true; 
-         document.getElementById("b3").disabled = true; 
-         $('#SaveButton').show();
-         $('#EditableButton').hide();
-         $(".mdp").each(function() {
-			 $( this ).attr("style","display: block;");
-			 
-         });
-         $(".coord").each(function() {
-         $( this ).attr("style","display: none;");
-         
-         });
-         });
-         $('#b1').click(function(){
-         
-         document.getElementById("b1").className = "btn btn-primary";
-         document.getElementById("b2").className = "btn btn-default";
-         document.getElementById("b3").className = "btn btn-default";
-         });
-         $('#b2').click(function(){
-         document.getElementById("b2").className = "btn btn-primary";
-         document.getElementById("b1").className = "btn btn-default";
-         document.getElementById("b3").className = "btn btn-default";
-         });
-         $('#b3').click(function(){
-         document.getElementById("b1").className = "btn btn-primary";
-         document.getElementById("b2").className = "btn btn-default";
-         document.getElementById("b3").className = "btn btn-default";
-         });
-         
-         
-         
-         });
-      </script>
-      <script>
-         $('#blah').hide();
-         $('#remove').hide();  
-         function readURL(input) {
-               if (input.files && input.files[0]) {
-                   var reader = new FileReader();
-                   
-                   reader.onload = function (e) {
-                       $('#blah').attr('src', e.target.result);
-                   }
-                   
-                   reader.readAsDataURL(input.files[0]);
-               }
-           }
-           
-           $("#imgInp").change(function(){
-               if( $('#imgInp').val()!=""){
-                   
-                   $('#remove').show();
-                   $('#blah').show('slow');
-             }
-               else{ $('#remove').hide();$('#blah').hide('slow');}
-                readURL(this);
-         
-           });
-             
-           $('#remove').click(function(){
-                 $('#imgInp').val('');
-                 $(this).hide();
-                 $('#blah').hide('slow');
-         $('#blah').attr('src','http://upload.wikimedia.org/wikipedia/commons/thumb/4/40/No_pub.svg/150px-No_pub.svg.png');
-         });
-          
-      </script>
-	
-      <script type="application/javascript">
-         $(document).ready(function () {
-         	$("#date-popover").popover({html: true, trigger: "manual"});
-         	$("#date-popover").hide();
-         	$("#date-popover").click(function (e) {
-         		$(this).hide();
-         	});
-        	
-         });
-         
-         function myNavFunction(id) {
-         	$("#date-popover").hide();
-         	var nav = $("#" + id).data("navigation");
-         	var to = $("#" + id).data("to");
-         	console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-         }
-      </script>
-	  <script>
-		 $('#my_modalAnnonce').on('show.bs.modal', function(e) {
-			var id = $(e.relatedTarget).data('identite');
-			var price = $(e.relatedTarget).data('price');
-		    var localite = $(e.relatedTarget).data('localite');
-			var date = $(e.relatedTarget).data('date');
-			var vendeur = $(e.relatedTarget).data('vendeur');
-			var description = $(e.relatedTarget).data('description');
-						
-			//document.getElementById("annonce").innerHTML = "Annonce : name" + id + "<br>Prix : " + price + " €<br>Localité : " + localite + "<br>Date : " + date;
-			document.getElementById("titre").innerHTML = "Détail de l'annonce : name" + id;
-			document.getElementById("vend").innerHTML = "Vendeur : " + vendeur + "<br>Localité : " + localite;
-			document.getElementById("prixAnnonce").innerHTML = price + " €";
-			document.getElementById("img").innerHTML = "Images";
-			document.getElementById("desc").innerHTML = description;
-			
-			//$(e.currentTarget).find('input[name="bookId"]').val(bookId);
-			//$(e.currentTarget).find('input[name="bookId2"]').val(bookId2);
 
-		});
-		 </script>
-   </body>
+            $('#inscrireButton').click(function() {
+                $(this).hide();
+
+                $("#formConnexion").hide();
+                $("#headerConnexion").hide();
+                $("#formInscription").show();
+                $("#headerInscription").show();
+                $("#bottom").hide();
+            });
+
+
+            $('#EditableButton').click(function() {
+                $(this).hide();
+                document.getElementById("b1").disabled = true;
+                document.getElementById("b2").disabled = true;
+                document.getElementById("b3").disabled = true;
+
+                $('#SaveButton').show();
+                $('#MdpButton').hide();
+                $(".edit").each(function() {
+                    $(this).attr("contenteditable", "true");
+                    $(this).attr("bgcolor", "#FFFFFF");
+                });
+            });
+
+            $('#SaveButton').click(function() {
+                $(this).hide();
+                $('#EditableButton').show();
+                $('#MdpButton').show();
+                document.getElementById("b1").disabled = false;
+                document.getElementById("b2").disabled = false;
+                document.getElementById("b3").disabled = false;
+                $(".edit").each(function() {
+                    $(this).attr("contenteditable", "false");
+                    $(this).attr("bgcolor", "#F2F2F2");
+                });
+
+                $(".coord").each(function() {
+                    $(this).attr("style", "display: block;");
+
+                });
+                $(".mdp").each(function() {
+                    $(this).attr("style", "display: none;");
+
+                });
+            });
+
+
+            $('#MdpButton').click(function() {
+                $(this).hide();
+                document.getElementById("b1").disabled = true;
+                document.getElementById("b2").disabled = true;
+                document.getElementById("b3").disabled = true;
+                $('#SaveButton').show();
+                $('#EditableButton').hide();
+                $(".mdp").each(function() {
+                    $(this).attr("style", "display: block;");
+
+                });
+                $(".coord").each(function() {
+                    $(this).attr("style", "display: none;");
+
+                });
+            });
+            $('#b1').click(function() {
+
+                document.getElementById("b1").className = "btn btn-primary";
+                document.getElementById("b2").className = "btn btn-default";
+                document.getElementById("b3").className = "btn btn-default";
+            });
+            $('#b2').click(function() {
+                document.getElementById("b2").className = "btn btn-primary";
+                document.getElementById("b1").className = "btn btn-default";
+                document.getElementById("b3").className = "btn btn-default";
+            });
+            $('#b3').click(function() {
+                document.getElementById("b1").className = "btn btn-primary";
+                document.getElementById("b2").className = "btn btn-default";
+                document.getElementById("b3").className = "btn btn-default";
+            });
+
+
+
+        });
+
+        function connection(idForm){
+			connect(idForm,function(){
+				if (readCookie("connected") != null && readCookie("connected") == "true") {
+					$("#btnAddAnnonce").show();
+					$("#btnLogin").text("Logout");					
+					$("#myModal2").modal('hide');
+				} else {
+					$("#btnAddAnnonce").hide();
+					$("#btnLogin").text("Login");
+				}
+			});
+		}
+
+		function creationUser(idForm){
+			createUser(idForm,function(){
+				if (readCookie("connected") != null && readCookie("connected") == "true") {
+					$("#btnAddAnnonce").show();
+					$("#btnLogin").text("Logout");					
+					$("#myModal2").modal('hide');
+				} else {
+					$("#btnAddAnnonce").hide();
+					$("#btnLogin").text("Login");
+				}
+			});
+		}
+    </script>
+    <script>
+        $('#blah').hide();
+        $('#remove').hide();
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgInp").change(function() {
+            if ($('#imgInp').val() != "") {
+
+                $('#remove').show();
+                $('#blah').show('slow');
+            } else {
+                $('#remove').hide();
+                $('#blah').hide('slow');
+            }
+            readURL(this);
+
+        });
+
+        $('#remove').click(function() {
+            $('#imgInp').val('');
+            $(this).hide();
+            $('#blah').hide('slow');
+            $('#blah').attr('src', 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/40/No_pub.svg/150px-No_pub.svg.png');
+        });
+    </script>
+
+    <script type="application/javascript">
+        $(document).ready(function() {
+            $("#date-popover").popover({
+                html: true,
+                trigger: "manual"
+            });
+            $("#date-popover").hide();
+            $("#date-popover").click(function(e) {
+                $(this).hide();
+            });
+
+        });
+
+        function myNavFunction(id) {
+            $("#date-popover").hide();
+            var nav = $("#" + id).data("navigation");
+            var to = $("#" + id).data("to");
+            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+        }
+    </script>
+    <script>
+        $('#my_modalAnnonce').on('show.bs.modal', function(e) {
+            var id = $(e.relatedTarget).data('identite');
+            var price = $(e.relatedTarget).data('price');
+            var localite = $(e.relatedTarget).data('localite');
+            var date = $(e.relatedTarget).data('date');
+            var vendeur = $(e.relatedTarget).data('vendeur');
+            var description = $(e.relatedTarget).data('description');
+
+            //document.getElementById("annonce").innerHTML = "Annonce : name" + id + "<br>Prix : " + price + " €<br>Localité : " + localite + "<br>Date : " + date;
+            document.getElementById("titre").innerHTML = "Détail de l'annonce : name" + id;
+            document.getElementById("vend").innerHTML = "Vendeur : " + vendeur + "<br>Localité : " + localite;
+            document.getElementById("prixAnnonce").innerHTML = price + " €";
+            document.getElementById("img").innerHTML = "Images";
+            document.getElementById("desc").innerHTML = description;
+
+            //$(e.currentTarget).find('input[name="bookId"]').val(bookId);
+            //$(e.currentTarget).find('input[name="bookId2"]').val(bookId2);
+
+        });
+    </script>
+</body>
+
 </html>

@@ -27,7 +27,7 @@ function modify(){
 	});
 }
 
-function createUser(idForm){
+function createUser(idForm, callback){
 	var params = getParam(idForm);
 	var url = "/LPDB_WEB/rest/utilisateur/addUtilisateur";
 	jQuery.post(url, params)
@@ -36,25 +36,33 @@ function createUser(idForm){
 		if (data.hasOwnProperty("status")) {
 			if (data.status == 500) {
 				alert("Mauvais pseudo");
+				createCookie("connected", false, 1);
+				callback();
 			} 
 		} else { /* Response 200 */
-			document.location.href = "/LPDB_WEB/index.html#";
+			createCookie("connected", true, 1);
+			callback();
+			$("#"+idForm)[0].reset();
+			//document.location.href = "/LPDB_WEB/index.html#";
 		}									
 	});
 }
 
-function connect(idForm){
+function connect(idForm, callback){
 	var params = getParam(idForm);
 	var url = "/LPDB_WEB/rest/utilisateur/connexion";
 	jQuery.post(url, params)
 	.always(function(data) {
-		console.log(data);
 		if (data.hasOwnProperty("status")) {
 			if (data.status == 404) {
 				alert("Mauvais pseudo");
+				createCookie("connected", false, 1);
+				callback();
 			} else { /* Response 200 */
 				createCookie("connected", true, 1);
-				document.location.href = "/LPDB_WEB/index.html";
+				callback();
+				$("#"+idForm)[0].reset();
+				//document.location.href = "/LPDB_WEB/index.html";
 			}
 		}								
 	});

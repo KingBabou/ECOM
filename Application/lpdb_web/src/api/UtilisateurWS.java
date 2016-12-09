@@ -15,6 +15,13 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import java.util.List;
+import java.util.Date;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 
 import Beans.UtilisateurBean;
 import Sessions.UtilisateurRemote;
@@ -74,8 +81,22 @@ public class UtilisateurWS {
 	public Response connexion(@FormParam("PSEUDONYME") String pseudonyme,
 							  @FormParam("MDP") String mdp) throws Exception {
 		UtilisateurBean utilisateur = this.utilisateurRemote.find(pseudonyme);
-		if (utilisateur != null && mdp.equals(utilisateur.getMdp()))
+		if (utilisateur != null && mdp.equals(utilisateur.getMdp())) {
+			/*Socket pingSocket = null;
+			PrintWriter out = null;
+			
+			try {
+				pingSocket = new Socket("172.17.0.4", 4242);
+				out = new PrintWriter(pingSocket.getOutputStream(), true);
+			} catch (IOException e) {
+				return Response.status(500).entity("La base de données OpenTSDB ne répond pas.").build();
+			}
+			
+			out.println("put connexions "+ new Date().getTime() + " 1 " + pseudonyme + "=1");
+			out.close();
+			pingSocket.close();*/
 			return Response.status(200).entity("Bienvenue " + pseudonyme).build();
+		}
 		return Response.status(404).entity("Mauvais pseudonyme et / ou mot de passe").build();
 	}
 
