@@ -64,11 +64,45 @@ public class UtilisateurWS {
 		str += "]";
 		return str;
 	}
+	
+	@GET
+	@Path("/getUtilisateur/{id}")
+	@Produces("application/json")
+	public String getUtilisateur(@PathParam("id") int id) throws Exception {
+		UtilisateurBean user = this.utilisateurRemote.findUser(id);
+		if(user != null) return user.toString();
+		else return "";
+	}
+	
+	@GET
+	@Path("/getUtilisateurByPseudo/{pseudo}")
+	@Produces("application/json")
+	public String getUtilisateurByPseudo(@PathParam("pseudo") String pseudo) throws Exception {
+		UtilisateurBean user = this.utilisateurRemote.findUserByPseudo(pseudo);
+		if(user != null) return user.toString();
+		else return "";
+	}
+	
+	@GET
+	@Path("/getUtilisateurInfo/{pseudo}")
+	@Produces("application/json")
+	public String getUtilisateurInfo(@PathParam("pseudo") String pseudo) throws Exception {
+		UtilisateurBean user = this.utilisateurRemote.findUserByPseudo(pseudo);
+		if(user != null) {
+			return "{" +
+					"\"nom\":\"" + user.getNom() + "\"," +
+					"\"prenom\":\"" + user.getPrenom() + "\"," +
+					"\"adresse\":\"" + user.getAdresse() + "\"" +			
+					"}";
+		} else {
+			return "";
+		}
+	}
 
 	@GET
 	@Path("/getPseudo/{id}")
 	@Produces("application/json")
-	public String getPseudo(@PathParam("number") int id) throws Exception {
+	public String getPseudo(@PathParam("id") int id) throws Exception {
 		UtilisateurBean user = this.utilisateurRemote.find(id);
 		if(user != null) return "{\"pseudo\":\"" + user.getPseudonyme() + "\"}";
 		else return "";
@@ -80,7 +114,7 @@ public class UtilisateurWS {
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_FORM_URLENCODED})
 	public Response connexion(@FormParam("PSEUDONYME") String pseudonyme,
 							  @FormParam("MDP") String mdp) throws Exception {
-		UtilisateurBean utilisateur = this.utilisateurRemote.find(pseudonyme);
+		UtilisateurBean utilisateur = this.utilisateurRemote.findUserByPseudo(pseudonyme);
 		if (utilisateur != null && mdp.equals(utilisateur.getMdp())) {
 			/*Socket pingSocket = null;
 			PrintWriter out = null;

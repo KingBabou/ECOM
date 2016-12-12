@@ -2,6 +2,8 @@ package Beans;
 
 import java.io.Serializable;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -45,7 +47,7 @@ public final class UtilisateurBean implements Serializable {
 		this.mdp = mdp;
 		this.administrateur = administrateur;
 	}
-
+	
 	public int getId() {return this.id;}
 	private void setId(int id) {this.id = id;}
 

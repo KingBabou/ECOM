@@ -43,7 +43,7 @@ public class UtilisateurServiceBean implements UtilisateurLocal, UtilisateurRemo
 		).getResultList();
 	}
 
-	public UtilisateurBean find(String pseudonyme) {
+	public UtilisateurBean findUserByPseudo(String pseudonyme) {
 		try {
 			return (UtilisateurBean)this.entityManager.createQuery(
 				"SELECT u FROM UtilisateurBean u WHERE u.pseudonyme = :pseudonyme"
@@ -53,7 +53,7 @@ public class UtilisateurServiceBean implements UtilisateurLocal, UtilisateurRemo
 		}
 	}
 
-	public UtilisateurBean find(int id) {
+	public UtilisateurBean findUser(int id) {
 		try {
 			return (UtilisateurBean)this.entityManager.createQuery(
 				"SELECT u FROM UtilisateurBean u WHERE u.id = :id"

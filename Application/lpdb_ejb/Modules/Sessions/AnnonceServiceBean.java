@@ -1,6 +1,7 @@
 package Sessions;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
@@ -36,6 +37,19 @@ public class AnnonceServiceBean implements AnnonceLocal, AnnonceRemote {
 	public AnnonceBean find(Object id) {
 		return this.entityManager.find(AnnonceBean.class, id);
 	}
+	
+	public List<AnnonceBean> findAnnoncesByPseudo(String pseudo){
+		
+		List<AnnonceBean> annonces = new ArrayList<AnnonceBean>(); 
+		
+		for(AnnonceBean annonce : this.findAll()){
+			if(annonce.getUtilisateur().getPseudonyme().equals(pseudo)){
+				annonces.add(annonce);
+			}
+		}
+		
+		return annonces;		
+	}
 
 	public String getPseudoUtilisateur(int id){
 		try {
@@ -49,10 +63,14 @@ public class AnnonceServiceBean implements AnnonceLocal, AnnonceRemote {
 		
 
 	@SuppressWarnings("unchecked")
-	public List<AnnonceBean> findAll() throws Exception {
-		return this.entityManager.createQuery(
-			"SELECT a FROM AnnonceBean a"
-		).getResultList();
+	public List<AnnonceBean> findAll() {
+		try {
+			return this.entityManager.createQuery(
+				"SELECT a FROM AnnonceBean a"
+			).getResultList();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 	public int getLastId() {

@@ -4,6 +4,8 @@ import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -53,8 +55,17 @@ public class AnnonceWS {
 	@GET
 	@Path("/getAnnonces")
 	@Produces("application/json")
-	public String getAnnonces() throws Exception {
-		List<AnnonceBean> annonces = this.annonceRemote.findAll();
+	public String getAnnonces(
+			@DefaultValue("") @QueryParam("pseudo") String p) throws Exception {
+		
+		List<AnnonceBean> annonces;
+				
+		if( !p.equals("")) {
+			annonces = this.annonceRemote.findAnnoncesByPseudo(p); //TODO
+		} else {
+			annonces = this.annonceRemote.findAll();
+		}
+
 		String str = "[";
 		for (int i = 0 ; i < annonces.size(); i++) {
 			str += annonces.get(i).toString();
@@ -70,7 +81,7 @@ public class AnnonceWS {
 	public String getAnnoncesPaged (
 			@PathParam("number") int nbAnnonces,
 			@PathParam("firstLine") int beginIndex) throws Exception {
-
+				
 		List<AnnonceBean> annonces = this.annonceRemote.findAll();
 
 		if(beginIndex > annonces.size()){

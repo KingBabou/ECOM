@@ -34,6 +34,10 @@ public final class AnnonceBean implements Serializable {
 
 	@Column(name = "TYPE", nullable = false)
 	private String type;
+	
+	@PrimaryKeyJoinColumn(name = "ID_UTILISATEUR", referencedColumnName = "ID")
+	@ManyToOne(fetch = FetchType.EAGER)
+	private UtilisateurBean utilisateur;
 
 	public AnnonceBean() {}
 
@@ -47,6 +51,14 @@ public final class AnnonceBean implements Serializable {
 		this.creation = new Date();
 		this.type = type;
 	}
+	
+	public UtilisateurBean getUtilisateur() {
+        return utilisateur;
+    }
+ 
+    public void setUtilisateur(UtilisateurBean utilisateur) {
+        this.utilisateur = utilisateur;
+    }
 
 	public int getId() {return this.id;}
 	public void setId(int id) {this.id = id;}

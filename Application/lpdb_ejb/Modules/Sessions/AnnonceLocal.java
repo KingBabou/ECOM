@@ -22,4 +22,6 @@ public interface AnnonceLocal {
 
 	public String getPseudoUtilisateur(int id);
 	
+	public List<AnnonceBean> findAnnoncesByPseudo(String pseudo);	
+	
 }

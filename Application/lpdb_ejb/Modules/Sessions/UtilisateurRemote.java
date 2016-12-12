@@ -18,7 +18,9 @@ public interface UtilisateurRemote {
 
 	public List<UtilisateurBean> findAll() throws Exception;
 	
-	public UtilisateurBean find(String pseudonyme);
+	public UtilisateurBean findUserByPseudo(String pseudonyme);
+	
+	public UtilisateurBean findUser(int id);
 	
 	public int getLastId();
 	

@@ -36,11 +36,12 @@ function createUser(idForm, callback){
 		if (data.hasOwnProperty("status")) {
 			if (data.status == 500) {
 				alert("Mauvais pseudo");
-				createCookie("connected", false, 1);
+				createCookie("connected", false, 0);
 				callback();
 			} 
 		} else { /* Response 200 */
-			createCookie("connected", true, 1);
+			createCookie("connected", true, 0);			
+			createCookie("userConnected", params.PSEUDONYME, 0);
 			callback();
 			$("#"+idForm)[0].reset();
 			//document.location.href = "/LPDB_WEB/index.html#";
@@ -54,16 +55,47 @@ function connect(idForm, callback){
 	jQuery.post(url, params)
 	.always(function(data) {
 		if (data.hasOwnProperty("status")) {
-			if (data.status == 404) {
+			if (data.status == 404 ) {
 				alert("Mauvais pseudo");
-				createCookie("connected", false, 1);
+				createCookie("connected", false, 0);
 				callback();
-			} else { /* Response 200 */
-				createCookie("connected", true, 1);
+			} else if (data.status == 500) {
+				alert("internal error");
+				createCookie("connected", false, 0);
+				callback();
+			} else if (data.status == 200) { 
+				createCookie("connected", true, 0);
+				createCookie("userConnected", params.PSEUDONYME, 0);
 				callback();
 				$("#"+idForm)[0].reset();
 				//document.location.href = "/LPDB_WEB/index.html";
 			}
 		}								
 	});
+}
+
+function setUserInfo(idTable){
+	var pseudo = readCookie("userConnected");
+	var url = "/LPDB_WEB/rest/utilisateur/getUtilisateurInfo/" + pseudo;
+	jQuery.get(url, function(data) {
+		if (data.hasOwnProperty("status")) {
+			if (data.status == 500) {
+				alert("internal error");
+			}
+		} else {
+			var innerHTML = "";
+			for (var key in data) {
+				var capKey = key.charAt(0).toUpperCase() + key.slice(1);
+				
+				 innerHTML += "<tr class=\"coord\">" + 
+								"<td bgcolor=\"F2F2F2\"> " + capKey + ": </td>" + 
+								"<td contenteditable='false' bgcolor=\"F2F2F2\"> " + data[key] + " </td>" + 
+							  "</tr>";
+			}	
+			
+			document.getElementById(idTable).innerHTML = innerHTML;
+			
+			console.log(data);
+		}						
+	});	
 }
