@@ -4,6 +4,7 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import Beans.AnnonceBean;
+import Beans.UtilisateurBean;
 
 @Remote
 public interface AnnonceRemote {
@@ -23,4 +24,6 @@ public interface AnnonceRemote {
 	public String getPseudoUtilisateur(int id);
 	
 	public List<AnnonceBean> findAnnoncesByPseudo(String pseudo);	
+	
+	public UtilisateurBean findUserByPseudo(String pseudo);
 }

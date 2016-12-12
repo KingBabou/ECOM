@@ -3,17 +3,14 @@ var currentIndex = 0;
 
 function getParamAnnonce(idForm) {
 	var x = document.getElementById(idForm);
-	var params = "{";
-	var i;
-	for (i = 0; i < x.length-1; i++) {
-		if (x.elements[i].nodeName == "INPUT"){
-			params = params + "\"" + x.elements[i].name + "\":\"" + x.elements[i].value + "\"";
-			if(i < x.length-2) params = params + ","; 
+	var arrStr = [];
+	for (var i = 0; i < x.length; i++) {
+
+		if ((x.elements[i].nodeName == "INPUT" || x.elements[i].nodeName == "TEXTAREA" ) && x.elements[i].name != ""){
+			arrStr.push("\"" + x.elements[i].name + "\":\"" + x.elements[i].value + "\"");
 		}
 	}
-	params = params + "}";
-
-	return JSON.parse(params);
+	return JSON.parse("{" + arrStr.join(",") + "}");
 }
 
 function deleteAnnonce(formId, callback){
@@ -27,6 +24,7 @@ function deleteAnnonce(formId, callback){
 			} 
 		} else { /* Response 200 */
 			callback();
+			loadAnnonces("list", currentIndex + nbLines);
 		}									
 	});
 }
@@ -72,7 +70,7 @@ function loadUserAnnonces(idTable){
 		var rowHeader = header.insertRow(0);
 	
 		for(var i=0; i < headers.length; i++){
-						rowHeader.insertCell(i).innerHTML = "<b>" + headers[i] + "</b>";
+			rowHeader.insertCell(i).innerHTML = "<b>" + headers[i] + "</b>";
 		}
 	});
 	
@@ -95,7 +93,7 @@ function loadAnnonces(idList, index){
 			var htmlText = "<tr>";
 			htmlText += "<td><img src=\"" + val.image + "\"/></td>";
 			//htmlText += "<td>" + val.titre + "</td>";
-			htmlText += "<td><a href=\"#my_modalAnnonce\" data-toggle=\"modal\" class=\"annonce\" data-identite=" + val.id + " data-price=" + val.prix + " data-localite=" + val.localite + " data-date=" + val.creation + " data-vendeur=" + val.pseudo + " data-description=" + val.description + ">" + val.titre + "</a></td>";
+			htmlText += "<td><a href=\"#my_modalAnnonce\" data-toggle=\"modal\" class=\"annonce\" data-titre=" + val.titre + " data-identite=" + val.id + " data-price=" + val.prix + " data-localite=" + val.localite + " data-date=" + val.creation + " data-vendeur=" + val.pseudo + " data-description=" + val.description + ">" + val.titre + "</a></td>";
 			htmlText += "<td>" + val.prix + "</td>";
 			htmlText += "<td>" + val.localite + "</td>";
 			htmlText += "<td>" + val.creation + "</td>";
@@ -115,4 +113,42 @@ function loadAnnonces(idList, index){
 		}
 		
 	});
+}
+
+function addAnnonce(formId, callback){
+	var params = getParamAnnonce(formId);
+
+	if(readCookie("userConnected") == null) alert("utilisateur non connecté");
+	
+	params["PSEUDO"] = readCookie("userConnected");
+	var url = "/LPDB_WEB/rest/annonce/addAnnonce";
+	jQuery.post(url, params)
+	.always(function(data) {
+		if (data.hasOwnProperty("status")) {
+			if (data.status == 500) {
+				alert("Erreur");
+			} 
+		} else { // Response 200 
+			callback();			
+			loadAnnonces("list", currentIndex + nbLines);
+		}									
+	});
+}
+
+
+function generateComboTypes(idCombo){
+	
+	var url = "/LPDB_WEB/rest/annonce/getTypes";
+	
+	jQuery.get(url, function(data) {
+		if (data.hasOwnProperty("status")) {
+			if (data.status == 500) {
+				alert("Erreur");
+			} 
+		} else { /* Response 200 */
+			$('#hType').val(data.types[0]);
+			$(idCombo).empty();
+			data.types.forEach(function(type) { $(idCombo).append("<option>" + type + "</option>")});
+		}		
+	});	
 }

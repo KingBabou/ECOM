@@ -4,3 +4,8 @@ footer {
 	width: 100%;
 	z-index: -1;
 }
+
+#scrolledTable{
+	height: 300px;
+	overflow: scroll;
+}

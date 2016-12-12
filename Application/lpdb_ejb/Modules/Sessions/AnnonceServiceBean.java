@@ -43,7 +43,7 @@ public class AnnonceServiceBean implements AnnonceLocal, AnnonceRemote {
 		List<AnnonceBean> annonces = new ArrayList<AnnonceBean>(); 
 		
 		for(AnnonceBean annonce : this.findAll()){
-			if(annonce.getUtilisateur().getPseudonyme().equals(pseudo)){
+			if(getPseudoUtilisateur(annonce.getIdUtilisateur()).equals(pseudo)){
 				annonces.add(annonce);
 			}
 		}
@@ -58,6 +58,16 @@ public class AnnonceServiceBean implements AnnonceLocal, AnnonceRemote {
 			).setParameter("id", id).getSingleResult()).getPseudonyme();
 		} catch (NoResultException e) {
 			return (String)null;
+		}
+	}
+	
+	public UtilisateurBean findUserByPseudo(String pseudonyme) {
+		try {
+			return (UtilisateurBean)this.entityManager.createQuery(
+				"SELECT u FROM UtilisateurBean u WHERE u.pseudonyme = :pseudonyme"
+			).setParameter("pseudonyme", pseudonyme).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
 		}
 	}
 		

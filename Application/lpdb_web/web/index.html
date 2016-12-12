@@ -83,7 +83,6 @@
 														<option value="0" selected>Tout les départements</option>
 														<option value="1">Isère</option>
 														<option value="2">Savoie</option>
-														<option value="3">Chez Julian</option>
 													 </select>
 												</div>
 												<div class="form-group">
@@ -118,7 +117,7 @@
 		</div>
 		<div class="col-sm-4">
 			<ul class="nav pull-right top-menu">
-				<li><button id="btnAddAnnonce" type="button" class="logout" data-toggle="modal" data-target="#myModal">Ajouter une annonce</button></li>
+				<li><button id="btnAddAnnonce" type="button" class="logout" data-toggle="modal" data-target="#ajoutAnnonceModal">Ajouter une annonce</button></li>
 				<li><button id="btnLogin" type="button" class="logout"></button></li>
 				<script type="text/javascript">
 					document.getElementById("btnLogin").innerHTML = readCookie("connected") == "true" ? "Logout" : "Login";
@@ -222,7 +221,7 @@
 	<!--footer start-->
 	<footer class="site-footer">
 		<div class="text-center">
-			2016 - NIOGRET-NOUGIER-RAMEL-HATTINGUAIS
+			2016 - HATTINGUAIS-NOUGUIER-RAMEL
 			<a href="index.html#" class="go-top">
 				<i class="fa fa-angle-up"></i>
 			</a>
@@ -235,7 +234,7 @@
 
     <!-- myModal -->
 
-    <div aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+    <div aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="ajoutAnnonceModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -243,19 +242,36 @@
                     <h4 class="modal-title">Ajouter une annonce</h4>
                 </div>
                 <div class="modal-body">
-                    <h4>Titre de l'annonce</h4>
-                    <input type="text" name="email" autocomplete="off" class="form-control placeholder-no-fix">
-                    <h4>Prix</h4>
-                    <input type="number" name="quantity" min="1" max="1000000">
-                    <h4>Image</h4>
-                    <input type="file" name="fileupload" value="fileupload" id="fileupload">
-                    <label for="fileupload"> Sélectionner une image</label>
-                    <h4>Description</h4>
-                    <textarea rows="4" cols="50"></textarea>
+					<form id="formAjoutAnnonce" method="POST" action="javascript:ajoutAnnonce('formAjoutAnnonce');">
+						<h4>Titre de l'annonce</h4>
+						<input type="text" name="TITRE" autocomplete="off" class="form-control placeholder-no-fix">
+						<h4>Prix</h4>
+						<input type="number" name="PRIX" min="0" max="1000000">
+						<h4>Image</h4>
+						<input type="file" value="fileupload" id="fileupload">
+						<label for="fileupload"> Sélectionner une image</label>
+						<h4> Type de l'annonce </h4>
+						<input id="hType" type="hidden" name="TYPE"></input>
+						<select id="comboType" onChange="combo(this, 'hType')"></select> 
+						<h4>Description</h4>
+						<textarea name="DESCRIPTION" rows="4" cols="50" form="formAjoutAnnonce"></textarea>
+                    </form>
                 </div>
+                <script type="application/javascript">
+					function combo(box, idInput){
+						var idx = box.selectedIndex;
+						var content = box.options[idx].innerHTML;
+						document.getElementById(idInput).value = content;	
+					}
+					
+					$("#btnAddAnnonce").on("click", function(e) {
+						$("#ajoutAnnonceModal").modal('show');
+						$("#ajoutAnnonceModal").show();
+					});          
+                </script>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Annuler</button>
-                    <button class="btn btn-theme" type="button">Publier mon annonce</button>
+                    <button id="btnPublierAnnonce" class="btn btn-theme" type="submit">Publier mon annonce</button>
                 </div>
             </div>
         </div>
@@ -309,7 +325,6 @@
                     <div class="card hovercard">
                         <div class="card-background">
                             <img class="card-bkimg" alt="" src="http://lorempixel.com/100/100/people/9/">
-                            <!-- http://lorempixel.com/850/280/people/9/ -->
                         </div>
                         <div class="useravatar">
                             <img alt="" src="http://lorempixel.com/100/100/people/9/" id="blah">
@@ -348,8 +363,10 @@
                                 </table>
                             </div>
                             <div class="tab-pane fade in" id="tab2">
-                                <table id="tableUserAnnonces" class="table table-user-information">
-                                </table>
+								<div id="scrolledTable">
+									<table id="tableUserAnnonces" class="table table-user-information">
+									</table>
+                                </div>
                             </div>
                             <div class="tab-pane fade in" id="tab3">
                                 <table class="table table-user-information">
@@ -482,6 +499,14 @@
 
     <script type="application/javascript">
         $(document).ready(function() {
+			
+			$('#ajoutAnnonceModal').on('shown.bs.modal', function () {
+				generateComboTypes("#comboType");
+			});
+			
+			$("#btnPublierAnnonce").on("click", function(e){
+				$("#formAjoutAnnonce").submit();
+			});
 			
 			$('#myModalUser').on('shown.bs.modal', function () {
 				if($('#username').text() != "") {
@@ -616,6 +641,13 @@
 				}
 			});
 		}
+		
+		function ajoutAnnonce(idForm){
+			addAnnonce(idForm, function(){
+				$("#ajoutAnnonceModal").modal('hide');
+				$(".modal-backdrop").hide();
+			});
+		}
     </script>
     <script>
         $('#blah').hide();
@@ -677,7 +709,7 @@
     <script>
         $('#my_modalAnnonce').on('show.bs.modal', function(e) {
             //document.getElementById("annonce").innerHTML = "Annonce : name" + id + "<br>Prix : " + price + " €<br>Localité : " + localite + "<br>Date : " + date;
-            document.getElementById("titre").innerHTML = "Détail de l'annonce : name" + $(e.relatedTarget).data('identite');
+            document.getElementById("titre").innerHTML = "Détail de l'annonce : " + $(e.relatedTarget).data('titre');
             document.getElementById("vend").innerHTML = "Vendeur : " + $(e.relatedTarget).data('vendeur') + "<br>Localité : " + $(e.relatedTarget).data('localite');
             document.getElementById("prixAnnonce").innerHTML = $(e.relatedTarget).data('price') + " €";
             document.getElementById("img").innerHTML = "Images";

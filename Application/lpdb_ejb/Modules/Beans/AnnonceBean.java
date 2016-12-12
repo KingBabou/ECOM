@@ -36,7 +36,7 @@ public final class AnnonceBean implements Serializable {
 	private String type;
 	
 	@PrimaryKeyJoinColumn(name = "ID_UTILISATEUR", referencedColumnName = "ID")
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private UtilisateurBean utilisateur;
 
 	public AnnonceBean() {}
