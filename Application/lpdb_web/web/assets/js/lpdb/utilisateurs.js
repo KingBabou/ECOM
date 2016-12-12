@@ -16,7 +16,6 @@ function modify(){
 	var url = "/LPDB_WEB/rest/utilisateur/editUtilisateur";
 	jQuery.post(url, params)
 	.always(function(data) {
-		console.log(data);
 		if (data.hasOwnProperty("status")) {
 			if (data.status == 500) {
 				alert("Mauvais pseudo");
@@ -32,7 +31,6 @@ function createUser(idForm, callback){
 	var url = "/LPDB_WEB/rest/utilisateur/addUtilisateur";
 	jQuery.post(url, params)
 	.always(function(data) {
-		console.log(data);
 		if (data.hasOwnProperty("status")) {
 			if (data.status == 500) {
 				alert("Mauvais pseudo");
@@ -95,7 +93,6 @@ function setUserInfo(idTable){
 			
 			document.getElementById(idTable).innerHTML = innerHTML;
 			
-			console.log(data);
 		}						
 	});	
 }

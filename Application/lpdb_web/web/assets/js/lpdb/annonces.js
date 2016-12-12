@@ -1,31 +1,32 @@
 var nbLines = 10;
 var currentIndex = 0;
 
-function getParam(idForm) {
+function getParamAnnonce(idForm) {
 	var x = document.getElementById(idForm);
 	var params = "{";
 	var i;
 	for (i = 0; i < x.length-1; i++) {
-		params = params + "\"" + x.elements[i].name + "\":\"" + x.elements[i].value + "\"";
-		if(i < x.length-2) params = params + ","; 
+		if (x.elements[i].nodeName == "INPUT"){
+			params = params + "\"" + x.elements[i].name + "\":\"" + x.elements[i].value + "\"";
+			if(i < x.length-2) params = params + ","; 
+		}
 	}
 	params = params + "}";
 
 	return JSON.parse(params);
 }
 
-function supprimerAnnonce(formId){
-	var params = getParam(formId);
+function deleteAnnonce(formId, callback){
+	var params = getParamAnnonce(formId);
 	var url = "/LPDB_WEB/rest/annonce/deleteAnnonce";
 	jQuery.post(url, params)
 	.always(function(data) {
-		console.log(data);
 		if (data.hasOwnProperty("status")) {
 			if (data.status == 500) {
 				alert("Erreur");
 			} 
 		} else { /* Response 200 */
-			loadAnnonces();
+			callback();
 		}									
 	});
 }
@@ -46,6 +47,8 @@ function loadUserAnnonces(idTable){
 			val["image"] = "";
 			val["localite"] = "Grenoble";
 			
+			var idForm = "formDelete" + val.id;
+			
 			var htmlText = "<tr>";
 			htmlText += "<td><img src=\"" + val.image + "\"/></td>";
 			//htmlText += "<td>" + val.titre + "</td>";
@@ -53,7 +56,10 @@ function loadUserAnnonces(idTable){
 			htmlText += "<td>" + val.prix + "</td>";
 			htmlText += "<td>" + val.localite + "</td>";
 			htmlText += "<td>" + val.creation + "</td>";
-			htmlText += "<td> <a href=\"\"> delete</a></td>";
+			htmlText += "<td> <form id='" + idForm  + "' method='POST' action= \"javascript:deleteAnnonce('" + idForm + "', function(){loadUserAnnonces('"+ idTable +"')});\">"
+			htmlText += "<input type='hidden' name='ID' value=" + val.id + "></input>";
+			htmlText += "<button type='submit'> Supprimer </button>";
+			htmlText += "</form></td>";
 			htmlText += "</tr>";
 			return htmlText;
 		}).join('');
