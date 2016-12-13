@@ -116,7 +116,7 @@ public class UtilisateurWS {
 							  @FormParam("MDP") String mdp) throws Exception {
 		UtilisateurBean utilisateur = this.utilisateurRemote.findUserByPseudo(pseudonyme);
 		if (utilisateur != null && mdp.equals(utilisateur.getMdp())) {
-			/*Socket pingSocket = null;
+			Socket pingSocket = null;
 			PrintWriter out = null;
 			
 			try {
@@ -128,7 +128,7 @@ public class UtilisateurWS {
 			
 			out.println("put connexions "+ new Date().getTime() + " 1 " + pseudonyme + "=1");
 			out.close();
-			pingSocket.close();*/
+			pingSocket.close();
 			return Response.status(200).entity("Bienvenue " + pseudonyme).build();
 		}
 		return Response.status(404).entity("Mauvais pseudonyme et / ou mot de passe").build();
