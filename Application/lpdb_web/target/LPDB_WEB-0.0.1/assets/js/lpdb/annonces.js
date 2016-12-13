@@ -1,33 +1,76 @@
-var nbLines = 1;
+var nbLines = 10;
 var currentIndex = 0;
 
-function getParam(idForm) {
+function getParamAnnonce(idForm) {
 	var x = document.getElementById(idForm);
-	var params = "{";
-	var i;
-	for (i = 0; i < x.length-1; i++) {
-		params = params + "\"" + x.elements[i].name + "\":\"" + x.elements[i].value + "\"";
-		if(i < x.length-2) params = params + ","; 
-	}
-	params = params + "}";
+	var arrStr = [];
+	for (var i = 0; i < x.length; i++) {
 
-	return JSON.parse(params);
+		if ((x.elements[i].nodeName == "INPUT" || x.elements[i].nodeName == "TEXTAREA" ) && x.elements[i].name != ""){
+			arrStr.push("\"" + x.elements[i].name + "\":\"" + x.elements[i].value + "\"");
+		}
+	}
+	return JSON.parse("{" + arrStr.join(",") + "}");
 }
 
-function supprimerAnnonce(formId){
-	var params = getParam(formId);
+function deleteAnnonce(formId, callback){
+	var params = getParamAnnonce(formId);
 	var url = "/LPDB_WEB/rest/annonce/deleteAnnonce";
 	jQuery.post(url, params)
 	.always(function(data) {
-		console.log(data);
 		if (data.hasOwnProperty("status")) {
 			if (data.status == 500) {
 				alert("Erreur");
 			} 
 		} else { /* Response 200 */
-			loadAnnonces();
+			callback();
+			loadAnnonces("list", currentIndex + nbLines);
 		}									
 	});
+}
+
+function loadUserAnnonces(idTable){
+	var pseudo = readCookie("userConnected");
+	if (pseudo == null) { return; }
+	var url = "/LPDB_WEB/rest/annonce/getAnnonces?pseudo=" + pseudo;
+	
+	jQuery.get(url, function(data) {
+
+		var listAnnonces = document.getElementById(idTable);
+
+		var htmlData = $.map(data, function(val) {
+			val["image"] = "";
+			val["localite"] = "Grenoble";
+			
+			var idForm = "formDelete" + val.id;
+			
+			var htmlText = "<tr>";
+			htmlText += "<td><img src=\"" + val.image + "\"/></td>";
+			//htmlText += "<td>" + val.titre + "</td>";
+			htmlText += "<td><a href=\"#my_modalAnnonce\" data-toggle=\"modal\" class=\"annonce\" data-identite=" + val.id + " data-price=" + val.prix + " data-localite=" + val.localite + " data-date=" + val.creation + " data-vendeur=" + val.pseudo + " data-description=" + val.description + ">" + val.titre + "</a></td>";
+			htmlText += "<td>" + val.prix + "</td>";
+			htmlText += "<td>" + val.localite + "</td>";
+			htmlText += "<td>" + val.creation + "</td>";
+			htmlText += "<td> <form id='" + idForm  + "' method='POST' action= \"javascript:deleteAnnonce('" + idForm + "', function(){loadUserAnnonces('"+ idTable +"')});\">"
+			htmlText += "<input type='hidden' name='ID' value=" + val.id + "></input>";
+			htmlText += "<button type='submit'> Supprimer </button>";
+			htmlText += "</form></td>";
+			htmlText += "</tr>";
+			return htmlText;
+		}).join('');
+
+		listAnnonces.innerHTML = htmlData;
+		
+
+		var headers = ["Image", "Titre", "Prix", "Localité", "Date de création", "options"];
+		var header = document.getElementById(idTable).createTHead();
+		var rowHeader = header.insertRow(0);
+	
+		for(var i=0; i < headers.length; i++){
+			rowHeader.insertCell(i).innerHTML = "<b>" + headers[i] + "</b>";
+		}
+	});
+	
 }
 
 function loadAnnonces(idList, index){
@@ -35,25 +78,6 @@ function loadAnnonces(idList, index){
 	var url = "/LPDB_WEB/rest/annonce/getAnnonces/" + (nbLines+1) + "/" + index;
 	
 	jQuery.get(url, function(data) {
-		/*var listAnnonces = jQuery(idList);
-		
-		listAnnonces.empty();
-		listAnnonces.html($.map(data, function(val) {
-			console.log(data);
-			val["image"] = "";
-			val["localite"] = "Grenoble";
-			
-			var htmlText = "<tr>";
-			htmlText += "<td><img src=\"" + val.image + "\"/></td>";
-			htmlText += "<td>" + val.titre + "</td>";
-			htmlText += "<td>" + val.prix + "</td>";
-			htmlText += "<td>" + val.localite + "</td>";
-			htmlText += "<td>" + val.creation + "</td>";
-			htmlText += "</tr>";
-			console.log(htmlText);
-			return htmlText;
-		}).join(''));*/
-
 		currentIndex = data.length <= nbLines ? -nbLines : index;
 		if(data.length == nbLines + 1) data.splice(nbLines, 1);
 
@@ -66,7 +90,7 @@ function loadAnnonces(idList, index){
 			var htmlText = "<tr>";
 			htmlText += "<td><img src=\"" + val.image + "\"/></td>";
 			//htmlText += "<td>" + val.titre + "</td>";
-			htmlText += "<td><a href=\"#my_modalAnnonce\" data-toggle=\"modal\" class=\"annonce\" data-identite=" + val.id + " data-price=" + val.prix + " data-localite=" + val.localite + " data-date=" + val.creation + " data-vendeur=" + val.pseudo + " data-description=" + val.description + ">" + val.titre + "</a></td>";
+			htmlText += "<td><a href=\"#my_modalAnnonce\" data-toggle=\"modal\" class=\"annonce\" data-titre=" + val.titre + " data-identite=" + val.id + " data-price=" + val.prix + " data-localite=" + val.localite + " data-date=" + val.creation + " data-vendeur=" + val.pseudo + " data-description=" + val.description + ">" + val.titre + "</a></td>";
 			htmlText += "<td>" + val.prix + "</td>";
 			htmlText += "<td>" + val.localite + "</td>";
 			htmlText += "<td>" + val.creation + "</td>";
@@ -85,40 +109,43 @@ function loadAnnonces(idList, index){
 			rowHeader.insertCell(i).innerHTML = "<b>" + headers[i] + "</b>";
 		}
 		
-		/*for(var i=0; i < data.length; i++) {
-			var l = document.createElement("li");
-			l.innerHTML = JSON.stringify(data[i]);
-			
-			var b = document.createElement("button");
-			b.innerHTML = "editer";
-			b.type = "submit";
-
-			var supBtn = document.createElement("button");
-			supBtn.innerHTML = "Supprimer";
-			supBtn.type = "submit";
-			
-			var formEdit = document.createElement("form");
-			formEdit.action = "http://localhost:8080/LPDB_WEB/editAnnonce.html";
-			formEdit.method = "GET";
-
-			var formSup = document.createElement("form");
-			formSup.id = "formSup"+i;
-			formSup.action = "javascript:supprimerAnnonce('" + formSup.id + "');";
-			formSup.method = "POST";
-
-			var input = document.createElement("input");
-			input.type = "hidden";
-			input.value = data[i].id;
-			input.name = "ID";
-
-			formEdit.append(b);
-			formEdit.append(input);
-			formSup.append(input);							
-			formSup.append(supBtn);							
-			l.append(formEdit);
-			l.append(formSup);					
-			listAnnonces.append(l);
-
-		}*/
 	});
+}
+
+function addAnnonce(formId, callback){
+	var params = getParamAnnonce(formId);
+
+	if(readCookie("userConnected") == null) alert("utilisateur non connecté");
+	
+	params["PSEUDO"] = readCookie("userConnected");
+	var url = "/LPDB_WEB/rest/annonce/addAnnonce";
+	jQuery.post(url, params)
+	.always(function(data) {
+		if (data.hasOwnProperty("status")) {
+			if (data.status == 500) {
+				alert("Erreur");
+			} 
+		} else { // Response 200 
+			callback();			
+			loadAnnonces("list", currentIndex + nbLines);
+		}									
+	});
+}
+
+
+function generateComboTypes(idCombo){
+	
+	var url = "/LPDB_WEB/rest/annonce/getTypes";
+	
+	jQuery.get(url, function(data) {
+		if (data.hasOwnProperty("status")) {
+			if (data.status == 500) {
+				alert("Erreur");
+			} 
+		} else { /* Response 200 */
+			$('#hType').val(data.types[0]);
+			$(idCombo).empty();
+			data.types.forEach(function(type) { $(idCombo).append("<option>" + type + "</option>")});
+		}		
+	});	
 }

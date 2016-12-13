@@ -36,9 +36,6 @@ function loadUserAnnonces(idTable){
 	
 	jQuery.get(url, function(data) {
 
-		currentIndex = data.length <= nbLines ? -nbLines : index;
-		if(data.length == nbLines + 1) data.splice(nbLines, 1);
-
 		var listAnnonces = document.getElementById(idTable);
 
 		var htmlData = $.map(data, function(val) {

@@ -5,27 +5,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="Dashboard">
-    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <title>Le pays du bazard</title>
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="assets/css/search.css">
-    <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
-    <link rel="stylesheet" type="text/css" href="assets/css/profil.css">
-    <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/main.css" rel="stylesheet">
-    <link href="assets/css/style-responsive.css" rel="stylesheet">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jqc-1.12.3/dt-1.10.12/datatables.min.js"></script>
-    <script src="assets/js/chart-master/Chart.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jqc-1.12.3/dt-1.10.12/datatables.min.js"></script>
+
+    <link rel="stylesheet" href="assets/css/bootstrap.css" >
+    <link rel="stylesheet" href="assets/css/search.css">
+    <link rel="stylesheet" href="assets/css/profil.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/style-responsive.css">
+    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css"/>
+
     <script type="text/javascript" src="assets/js/lpdb/annonces.js"></script>
     <script type="text/javascript" src="assets/js/lpdb/utilisateurs.js"></script>
     <script type="text/javascript" src="assets/js/lpdb/cookie.js"></script>
+    
+    <script type="text/javascript" src="assets/js/chart-master/Chart.js"></script>    
+    <script type="text/javascript" src="assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.scrollTo.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.nicescroll.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.sparkline.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>    
+    <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -36,209 +38,208 @@
 </head>
 
 <body>
-    <section id="container">
-        <!-- **********************************************************************************************************************************************************
-            TOP BAR CONTENT & NOTIFICATIONS
-            *********************************************************************************************************************************************************** -->
-        <!--header start-->
-        <header class="header black-bg">
-			<div class="col-sm-4">
-				<div class="sidebar-toggle-box">
-					<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-				</div>
-				<!--logo start-->
-				<a href="index.html" class="logo"><b>Le pays du bazard</b></a>
-				<!--logo end-->
-            </div>
-            <div class="col-sm-4" id="top_menu">
-                <!-- settings start -->
-                <div>
-                    <div>
-                        <div style="padding-top:2.5%">
-                            <div class="input-group" id="adv-search">
-                                <input type="text" class="form-control" placeholder="Recherchez une offre" />
-                                <div class="input-group-btn">
-                                    <div class="btn-group" role="group">
-                                        <div class="dropdown dropdown-lg">
-                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                                <form class="form-horizontal" role="form">
-                                                    <div class="form-group">
-                                                        <label for="filter">Filtrer par</label>
-                                                        <select class="form-control">
-															<option value="1">Prix</option>
-															<option value="2">Utilisateur</option>
-															<option value="3">Date</option>
-														 </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="filter">Région</label>
-                                                        <select class="form-control">
-															<option value="0" selected>Toutes les régions</option>
-															<option value="1">Ile de France</option>
-															<option value="2">Rhone Alpes</option>
-															<option value="3">PACA</option>
-														</select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="filter">Département</label>
-                                                        <select class="form-control">
-															<option value="0" selected>Tout les départements</option>
-															<option value="1">Isère</option>
-															<option value="2">Savoie</option>
-															<option value="3">Chez Julian</option>
-														 </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="contain">
-														 Type
-														 </label>
-                                                        <input class="form-control" type="text" />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="contain">
-														 Mots clés
-														 </label>
-                                                        <input class="form-control" type="text" />
-                                                    </div>
-                                                    <label for="contain">
-													  Prix
-													</label>
-                                                    <input class="form-control" type="number" placeholder="Prix min" pattern="\d*" />
-                                                    <input class="form-control" type="number" placeholder="Prix max" pattern="\d*" />
+	<!-- **********************************************************************************************************************************************************
+		TOP BAR CONTENT & NOTIFICATIONS
+		*********************************************************************************************************************************************************** -->
+	<!--header start-->
+	<header class="header black-bg">
+		<div class="col-sm-4">
+			<div class="sidebar-toggle-box">
+				<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+			</div>
+			<!--logo start-->
+			<a href="index.html" class="logo"><b>Le pays du bazard</b></a>
+			<!--logo end-->
+		</div>
+		<div class="col-sm-4" id="top_menu">
+			<!-- settings start -->
+			<div>
+				<div>
+					<div style="padding-top:2.5%">
+						<div class="input-group" id="adv-search">
+							<input type="text" class="form-control" placeholder="Recherchez une offre" />
+							<div class="input-group-btn">
+								<div class="btn-group" role="group">
+									<div class="dropdown dropdown-lg">
+										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+										<div class="dropdown-menu dropdown-menu-right" role="menu">
+											<form class="form-horizontal" role="form">
+												<div class="form-group">
+													<label for="filter">Filtrer par</label>
+													<select class="form-control">
+														<option value="1">Prix</option>
+														<option value="2">Utilisateur</option>
+														<option value="3">Date</option>
+													 </select>
 												</div>
-                                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--  notification end -->
-            </div>
-            <div class="col-sm-4">
-                <ul class="nav pull-right top-menu">
-                    <li><button id="btnAddAnnonce" type="button" class="logout" data-toggle="modal" data-target="#myModal">Ajouter une annonce</button></li>
-                    <li><button id="btnLogin" type="button" class="logout"></button></li>
-                    <script type="text/javascript">
-                        document.getElementById("btnLogin").innerHTML = readCookie("connected") == "true" ? "Logout" : "Login";
-                        
-                        //show edit annonce if not connected
-                        if (readCookie("connected") != null && readCookie("connected") == "true") {
-                            $("#btnAddAnnonce").show();
-                        } else {
-                            $("#btnAddAnnonce").hide();
-                        }
+												<div class="form-group">
+													<label for="filter">Région</label>
+													<select class="form-control">
+														<option value="0" selected>Toutes les régions</option>
+														<option value="1">Ile de France</option>
+														<option value="2">Rhone Alpes</option>
+														<option value="3">PACA</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label for="filter">Département</label>
+													<select class="form-control">
+														<option value="0" selected>Tout les départements</option>
+														<option value="1">Isère</option>
+														<option value="2">Savoie</option>
+													 </select>
+												</div>
+												<div class="form-group">
+													<label for="contain">
+													 Type
+													 </label>
+													<input class="form-control" type="text" />
+												</div>
+												<div class="form-group">
+													<label for="contain">
+													 Mots clés
+													 </label>
+													<input class="form-control" type="text" />
+												</div>
+												<label for="contain">
+												  Prix
+												</label>
+												<input class="form-control" type="number" placeholder="Prix min" pattern="\d*" />
+												<input class="form-control" type="number" placeholder="Prix max" pattern="\d*" />
+											</div>
+										<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--  notification end -->
+		</div>
+		<div class="col-sm-4">
+			<ul class="nav pull-right top-menu">
+				<li><button id="btnAddAnnonce" type="button" class="logout" data-toggle="modal" data-target="#ajoutAnnonceModal">Ajouter une annonce</button></li>
+				<li><button id="btnLogin" type="button" class="logout"></button></li>
+				<script type="text/javascript">
+					document.getElementById("btnLogin").innerHTML = readCookie("connected") == "true" ? "Logout" : "Login";
+					
+					//show edit annonce if not connected
+					if (readCookie("connected") != null && readCookie("connected") == "true") {
+						$("#btnAddAnnonce").show();
+					} else {
+						$("#btnAddAnnonce").hide();
+					}
 
-                        //open modal window to connect of not connected
-                        $("#btnLogin").on("click", function(e) {
-							if (readCookie("connected") != null && readCookie("connected") == "true") {
-								//Logout
-								$("#myModal2").modal('hide');
-								$("#btnAddAnnonce").hide();
-								createCookie("connected", false, 0);
-								$(this).text("Login");
-							} else {
-								$("#myModal2").modal('show');
-								
-								$("#headerConnexion").show();
-								$("#inscrireButton").show();
-								$("#formConnexion").show();
-								$("#bottom").show();
-								$("#headerInscription").hide();
-								$("#formInscription").hide();
+					//open modal window to connect of not connected
+					$("#btnLogin").on("click", function(e) {
+						if (readCookie("connected") != null && readCookie("connected") == "true") {
+							//Logout
+							$("#myModal2").modal('hide');
+							$("#btnAddAnnonce").hide();
+							createCookie("connected", false, 0);
+							eraseCookie("userConnected");
+							$("#username").text("");
+							$(this).text("Login");
+							$("#sidebar").hide();
+						} else {
+							$("#myModal2").modal('show');
+							
+							$("#headerConnexion").show();
+							$("#inscrireButton").show();
+							$("#formConnexion").show();
+							$("#bottom").show();
+							$("#headerInscription").hide();
+							$("#formInscription").hide();
 
-								$("#formInscription")[0].reset();
-								$("#formConnexion")[0].reset();
-								
-							}
+							$("#formInscription")[0].reset();
+							$("#formConnexion")[0].reset();
+							
+						}
 
-                        });
-                    </script>
+					});
+				</script>
 
-                </ul>
-            </div>
-        </header>
-        <!--header end-->
-        <!-- **********************************************************************************************************************************************************
-            MAIN SIDEBAR MENU
-            *********************************************************************************************************************************************************** -->
-        <!--sidebar start-->
-        <aside>
-            <div id="sidebar" class="nav-collapse ">
-                <!-- sidebar menu start-->
-                <ul class="sidebar-menu" id="nav-accordion">
-                    <p class="centered">
-                        <a class="active" data-toggle="modal" data-target="#myModalUser"><img src="assets/img/marechal.png" class="img-circle" width="60"></a>
-                    </p>
-                    <h5 class="centered">
-                        Edwin Niogret
-                    </h5>
-                    <li class="mt">
-                        <a class="active" data-toggle="modal" data-target="#myModalUser">
-                            <i class="fa fa-user"></i>
-                            <span>
-							 Profil
-							</span>
-                        </a>
-                    </li>
-                </ul>
-                <!-- sidebar menu end-->
-            </div>
-        </aside>
-        <!--sidebar end-->
-        <!-- **********************************************************************************************************************************************************
-            MAIN CONTENT
-            *********************************************************************************************************************************************************** -->
-        <!--main content start-->
-        <section id="main-content">
-            <section class="wrapper">
-                <table id="list" class="table table-striped table-bordered" width="100%" cellspacing="0">
-                </table>
-                <a href="#" id="next">
-               NEXT
-               </a>
-            </section>
-        </section>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                loadAnnonces("list", 0);
-            });
-
+			</ul>
+		</div>
+	</header>
+	<!--header end-->
+	<!-- **********************************************************************************************************************************************************
+		MAIN SIDEBAR MENU
+		*********************************************************************************************************************************************************** -->
+	<!--sidebar start-->
+	<aside>
+		<div id="sidebar" class="nav-collapse" style="display: none;">
+			<!-- sidebar menu start-->
+			<ul class="sidebar-menu" id="nav-accordion">
+				<p class="centered">
+					<a class="active" data-toggle="modal" data-target="#myModalUser"><img src="assets/img/marechal.png" class="img-circle" width="60"></a>
+				</p>
+				<h5 id="username" class="centered">
+				</h5>
+				<li class="mt">
+					<a class="active" data-toggle="modal" data-target="#myModalUser">
+						<i class="fa fa-user"></i>
+						<span>
+						 Profil
+						</span>
+					</a>
+				</li>
+			</ul>
+			<!-- sidebar menu end-->
+		</div>
+	</aside>
+	<!--sidebar end-->
+	<!-- **********************************************************************************************************************************************************
+		MAIN CONTENT
+		*********************************************************************************************************************************************************** -->
+	<!--main content start-->
+	<section id="main-content">
+		<section class="wrapper">
+			<table id="list" class="table table-striped table-bordered" width="100%" cellspacing="0">
+			</table>
+			<a href="#" id="next">
+		   NEXT
+		   </a>
+		</section>
+	</section>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			loadAnnonces("list", 0);
+		});
 
 
-            $("#next").click(function() {
-                // display next elements
-                displayNext();
-            });
 
-            function displayNext() {
-                loadAnnonces("list", currentIndex + nbLines);
-            }
-        </script>
+		$("#next").click(function() {
+			// display next elements
+			displayNext();
+		});
 
-        <!--main content end-->
-        <!--footer start-->
-        <footer class="site-footer">
-            <div class="text-center">
-                2016 - NIOGRET-NOUGIER-RAMEL-HATTINGUAIS
-                <a href="index.html#" class="go-top">
-                    <i class="fa fa-angle-up"></i>
-                </a>
-            </div>
-        </footer>
-        <!--footer end-->
-    </section>
+		function displayNext() {
+			loadAnnonces("list", currentIndex + nbLines);
+		}
+	</script>
+
+	<!--main content end-->
+	<!--footer start-->
+	<footer class="site-footer">
+		<div class="text-center">
+			2016 - HATTINGUAIS-NOUGUIER-RAMEL
+			<a href="index.html#" class="go-top">
+				<i class="fa fa-angle-up"></i>
+			</a>
+		</div>
+	</footer>
+	<!--footer end-->
 
 
     <!--Fenêtres modales-->
 
     <!-- myModal -->
 
-    <div aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+    <div aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="ajoutAnnonceModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -246,19 +247,31 @@
                     <h4 class="modal-title">Ajouter une annonce</h4>
                 </div>
                 <div class="modal-body">
-                    <h4>Titre de l'annonce</h4>
-                    <input type="text" name="email" autocomplete="off" class="form-control placeholder-no-fix">
-                    <h4>Prix</h4>
-                    <input type="number" name="quantity" min="1" max="1000000">
-                    <h4>Image</h4>
-                    <input type="file" name="fileupload" value="fileupload" id="fileupload">
-                    <label for="fileupload"> Sélectionner une image</label>
-                    <h4>Description</h4>
-                    <textarea rows="4" cols="50"></textarea>
+					<form id="formAjoutAnnonce" method="POST" action="javascript:ajoutAnnonce('formAjoutAnnonce');">
+						<h4>Titre de l'annonce</h4>
+						<input type="text" name="TITRE" autocomplete="off" class="form-control placeholder-no-fix">
+						<h4>Prix</h4>
+						<input type="number" name="PRIX" min="0" max="1000000">
+						<h4>Image</h4>
+						<input type="file" value="fileupload" id="fileupload">
+						<label for="fileupload"> Sélectionner une image</label>
+						<h4> Type de l'annonce </h4>
+						<input id="hType" type="hidden" name="TYPE"></input>
+						<select id="comboType" onChange="combo(this, 'hType')"></select> 
+						<h4>Description</h4>
+						<textarea name="DESCRIPTION" rows="4" cols="50" form="formAjoutAnnonce"></textarea>
+                    </form>
                 </div>
+                <script type="application/javascript">
+					function combo(box, idInput){
+						var idx = box.selectedIndex;
+						var content = box.options[idx].innerHTML;
+						document.getElementById(idInput).value = content;	
+					}       
+                </script>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">Annuler</button>
-                    <button class="btn btn-theme" type="button">Publier mon annonce</button>
+                    <button id="btnPublierAnnonce" class="btn btn-theme" type="submit">Publier mon annonce</button>
                 </div>
             </div>
         </div>
@@ -312,12 +325,11 @@
                     <div class="card hovercard">
                         <div class="card-background">
                             <img class="card-bkimg" alt="" src="http://lorempixel.com/100/100/people/9/">
-                            <!-- http://lorempixel.com/850/280/people/9/ -->
                         </div>
                         <div class="useravatar">
                             <img alt="" src="http://lorempixel.com/100/100/people/9/" id="blah">
                         </div>
-                        <div class="card-info"> <span class="card-title">Pamela Anderson</span>
+                        <div class="card-info"> <span id="modalUsername" class="card-title"></span>
                         </div>
                     </div>
                     <form id="form1" runat="server">
@@ -347,17 +359,14 @@
                     <div class="well">
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab1">
-                                <table class="table table-user-information">
-                                    <tbody>
-                                        <tr class="coord">
-                                            <td bgcolor="F2F2F2">Coordonnées:</td>
-                                            <td contenteditable='false' bgcolor="F2F2F2">Programming</td>
-                                        </tr>
-                                    </tbody>
+                                <table id="tableUserInfo" class="table table-user-information">
                                 </table>
                             </div>
                             <div class="tab-pane fade in" id="tab2">
-                                <h3>This is tab 2</h3>
+								<div id="scrolledTable">
+									<table id="tableUserAnnonces" class="table table-user-information">
+									</table>
+                                </div>
                             </div>
                             <div class="tab-pane fade in" id="tab3">
                                 <table class="table table-user-information">
@@ -386,8 +395,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-body">
                 </div>
             </div>
         </div>
@@ -443,7 +450,7 @@
                                     <h4 class="modal-title">Mot de passe oublié ?</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Entre votre mot de passe çi-dessous pour réinitialiser votre mot de passe.</p>
+                                    <p>Entre votre mot de passe ci-dessous pour réinitialiser votre mot de passe.</p>
                                     <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
                                 </div>
                                 <div class="modal-footer">
@@ -462,36 +469,34 @@
 
     <!--Fin Fenêtres modales-->
 
-    <!-- js placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <!--BACKSTRETCH-->
-    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
-    <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
-    <!-- js placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/jquery-1.8.3.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="assets/js/jquery.scrollTo.min.js"></script>
-    <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="assets/js/jquery.sparkline.js"></script>
-
-    <!-- js placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/jquery-1.8.3.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="assets/js/jquery.scrollTo.min.js"></script>
-    <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="assets/js/jquery.sparkline.js"></script>
-    <!--common script for all pages-->
-    <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
-
-
-
-    <script type="application/javascript">
+	<script type="application/javascript">
         $(document).ready(function() {
+			
+			$('#ajoutAnnonceModal').on('shown.bs.modal', function () {
+				generateComboTypes("#comboType");
+			});
+			
+			$("#btnPublierAnnonce").on("click", function(e){
+				$("#formAjoutAnnonce").submit();
+			});
+			
+			$('#myModalUser').on('shown.bs.modal', function () {
+				if($('#username').text() != "") {
+					$("#modalUsername").text(readCookie("userConnected") != null ? readCookie("userConnected") : "");
+					setUserInfo("tableUserInfo");					
+					loadUserAnnonces("tableUserAnnonces");
+				}
+			});
+			
+			if(readCookie("userConnected") != null){
+				$("#username").text( readCookie("userConnected"));
+				$("#sidebar").show();
+			} else {
+				$("#username").text("");
+				$("#sidebar").hide();
+			}
+			
+			
             $("#date-popover").popover({
                 html: true,
                 trigger: "manual"
@@ -572,15 +577,15 @@
                 document.getElementById("b2").className = "btn btn-default";
                 document.getElementById("b3").className = "btn btn-default";
             });
-            $('#b2').click(function() {
+            $('#b2').click(function() {				
                 document.getElementById("b2").className = "btn btn-primary";
                 document.getElementById("b1").className = "btn btn-default";
                 document.getElementById("b3").className = "btn btn-default";
             });
             $('#b3').click(function() {
-                document.getElementById("b1").className = "btn btn-primary";
+                document.getElementById("b1").className = "btn btn-default";
                 document.getElementById("b2").className = "btn btn-default";
-                document.getElementById("b3").className = "btn btn-default";
+                document.getElementById("b3").className = "btn btn-primary";
             });
 
 
@@ -588,28 +593,40 @@
         });
 
         function connection(idForm){
-			connect(idForm,function(){
+			connect(idForm,function(name){
 				if (readCookie("connected") != null && readCookie("connected") == "true") {
 					$("#btnAddAnnonce").show();
 					$("#btnLogin").text("Logout");					
-					$("#myModal2").modal('hide');
+					$("#myModal2").modal('hide');					
+					$("#username").text(readCookie("userConnected"));
+					$("#sidebar").show();
 				} else {
 					$("#btnAddAnnonce").hide();
 					$("#btnLogin").text("Login");
+					$("#sidebar").hide();
 				}
 			});
 		}
 
 		function creationUser(idForm){
-			createUser(idForm,function(){
+			createUser(idForm,function(name){
 				if (readCookie("connected") != null && readCookie("connected") == "true") {
 					$("#btnAddAnnonce").show();
 					$("#btnLogin").text("Logout");					
 					$("#myModal2").modal('hide');
+					$("#username").text(readCookie("userConnected"));
+					$("#sidebar").show();
 				} else {
 					$("#btnAddAnnonce").hide();
 					$("#btnLogin").text("Login");
+					$("#sidebar").hide();
 				}
+			});
+		}
+		
+		function ajoutAnnonce(idForm){
+			addAnnonce(idForm, function(){
+				$("#ajoutAnnonceModal").modal('hide');
 			});
 		}
     </script>
@@ -672,23 +689,12 @@
     </script>
     <script>
         $('#my_modalAnnonce').on('show.bs.modal', function(e) {
-            var id = $(e.relatedTarget).data('identite');
-            var price = $(e.relatedTarget).data('price');
-            var localite = $(e.relatedTarget).data('localite');
-            var date = $(e.relatedTarget).data('date');
-            var vendeur = $(e.relatedTarget).data('vendeur');
-            var description = $(e.relatedTarget).data('description');
-
             //document.getElementById("annonce").innerHTML = "Annonce : name" + id + "<br>Prix : " + price + " €<br>Localité : " + localite + "<br>Date : " + date;
-            document.getElementById("titre").innerHTML = "Détail de l'annonce : name" + id;
-            document.getElementById("vend").innerHTML = "Vendeur : " + vendeur + "<br>Localité : " + localite;
-            document.getElementById("prixAnnonce").innerHTML = price + " €";
+            document.getElementById("titre").innerHTML = "Détail de l'annonce : " + $(e.relatedTarget).data('titre');
+            document.getElementById("vend").innerHTML = "Vendeur : " + $(e.relatedTarget).data('vendeur') + "<br>Localité : " + $(e.relatedTarget).data('localite');
+            document.getElementById("prixAnnonce").innerHTML = $(e.relatedTarget).data('price') + " €";
             document.getElementById("img").innerHTML = "Images";
-            document.getElementById("desc").innerHTML = description;
-
-            //$(e.currentTarget).find('input[name="bookId"]').val(bookId);
-            //$(e.currentTarget).find('input[name="bookId2"]').val(bookId2);
-
+            document.getElementById("desc").innerHTML = $(e.relatedTarget).data('description');
         });
     </script>
 </body>

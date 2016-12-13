@@ -1,3 +1,11 @@
 footer {
-	top:0;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+#scrolledTable{
+	height: 300px;
+	overflow: scroll;
 }
