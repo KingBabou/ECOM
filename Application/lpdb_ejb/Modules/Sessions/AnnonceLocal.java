@@ -21,7 +21,7 @@ public interface AnnonceLocal {
 	public int getLastId();
 
 	public String getPseudoUtilisateur(int id);
-	
-	public List<AnnonceBean> findAnnoncesByPseudo(String pseudo);	
+
+	public List<AnnonceBean> recherche(String recherche);
 	
 }
