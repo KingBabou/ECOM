@@ -28,7 +28,7 @@ create table ANNONCE (
 	CREATION date,
 	TYPE varchar(255),
 	primary key (ID),
-	constraint fk_ID_UTILISATEUR foreign key (ID_UTILISATEUR) references UTILISATEUR(ID)
+	constraint fk_ID_UTILISATEUR foreign key (ID_UTILISATEUR) references UTILISATEUR(ID) ON DELETE CASCADE
 );
 
 create table IMAGE (
@@ -36,5 +36,5 @@ create table IMAGE (
 	ID_ANNONCE int not null,
 	URL varchar(1024),
 	primary key (ID),
-	constraint fk_ID_ANNONCE foreign key (ID_ANNONCE) references ANNONCE(ID)
+	constraint fk_ID_ANNONCE foreign key (ID_ANNONCE) references ANNONCE(ID) ON DELETE CASCADE
 );
