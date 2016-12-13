@@ -1,6 +1,7 @@
 package Sessions;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
@@ -36,6 +37,19 @@ public class AnnonceServiceBean implements AnnonceLocal, AnnonceRemote {
 	public AnnonceBean find(Object id) {
 		return this.entityManager.find(AnnonceBean.class, id);
 	}
+	
+	public List<AnnonceBean> findAnnoncesByPseudo(String pseudo){
+		
+		List<AnnonceBean> annonces = new ArrayList<AnnonceBean>(); 
+		
+		for(AnnonceBean annonce : this.findAll()){
+			if(getPseudoUtilisateur(annonce.getIdUtilisateur()).equals(pseudo)){
+				annonces.add(annonce);
+			}
+		}
+		
+		return annonces;		
+	}
 
 	public String getPseudoUtilisateur(int id){
 		try {
@@ -46,25 +60,33 @@ public class AnnonceServiceBean implements AnnonceLocal, AnnonceRemote {
 			return (String)null;
 		}
 	}
+	
+	public UtilisateurBean findUserByPseudo(String pseudonyme) {
+		try {
+			return (UtilisateurBean)this.entityManager.createQuery(
+				"SELECT u FROM UtilisateurBean u WHERE u.pseudonyme = :pseudonyme"
+			).setParameter("pseudonyme", pseudonyme).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 		
 
 	@SuppressWarnings("unchecked")
-	public List<AnnonceBean> findAll() throws Exception {
-		return this.entityManager.createQuery(
-			"SELECT a FROM AnnonceBean a"
-		).getResultList();
+	public List<AnnonceBean> findAll() {
+		try {
+			return this.entityManager.createQuery(
+				"SELECT a FROM AnnonceBean a"
+			).getResultList();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 	public int getLastId() {
 		return (int)this.entityManager.createNativeQuery(
 			"SELECT MAX(ID) FROM ANNONCE"
 		).getSingleResult() + 1;
-	}
-
-	public List<AnnonceBean> recherche(String recherche) {
-		return this.entityManager.createQuery(
-			"SELECT * FROM ANNONCE WHERE TITRE LIKE '%" + recherche + "%'"
-		).getResultList();
 	}
 	
 }

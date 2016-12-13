@@ -473,6 +473,7 @@
         $(document).ready(function() {
 			
 			$('#ajoutAnnonceModal').on('shown.bs.modal', function () {
+				$("#formAjoutAnnonce")[0].reset();
 				generateComboTypes("#comboType");
 			});
 			

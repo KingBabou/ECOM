@@ -4,6 +4,8 @@ import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -18,8 +20,10 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import Beans.AnnonceBean;
+import Beans.UtilisateurBean;
 import Beans.Type;
 import Sessions.AnnonceRemote;
 import Sessions.AnnonceServiceBean;
@@ -31,6 +35,8 @@ public class AnnonceWS {
 
 	@Context
 	private UriInfo contexte;
+	
+	private Logger log = Logger.getLogger(this.getClass().getName());
 
 	@EJB
 	private AnnonceRemote annonceRemote = new AnnonceServiceBean();
@@ -53,8 +59,17 @@ public class AnnonceWS {
 	@GET
 	@Path("/getAnnonces")
 	@Produces("application/json")
-	public String getAnnonces() throws Exception {
-		List<AnnonceBean> annonces = this.annonceRemote.findAll();
+	public String getAnnonces(
+			@DefaultValue("") @QueryParam("pseudo") String p) throws Exception {
+		
+		List<AnnonceBean> annonces;
+				
+		if( !p.equals("")) {
+			annonces = this.annonceRemote.findAnnoncesByPseudo(p); //TODO
+		} else {
+			annonces = this.annonceRemote.findAll();
+		}
+
 		String str = "[";
 		for (int i = 0 ; i < annonces.size(); i++) {
 			str += annonces.get(i).toString();
@@ -70,7 +85,7 @@ public class AnnonceWS {
 	public String getAnnoncesPaged (
 			@PathParam("number") int nbAnnonces,
 			@PathParam("firstLine") int beginIndex) throws Exception {
-
+				
 		List<AnnonceBean> annonces = this.annonceRemote.findAll();
 
 		if(beginIndex > annonces.size()){
@@ -102,15 +117,22 @@ public class AnnonceWS {
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_FORM_URLENCODED})
 	@Path("/addAnnonce")
-	public Response addAnnonce(@FormParam("ID_UTILISATEUR") String id_utilisateur,
-							   @FormParam("TITRE") String titre,
+	public Response addAnnonce(@FormParam("TITRE") String titre,
 							   @FormParam("PRIX") String prix,
+							   @FormParam("TYPE") String type,
 							   @FormParam("DESCRIPTION") String description,
-							   @FormParam("TYPE") String type) throws Exception {
+							   @FormParam("PSEUDO") String pseudo) throws Exception {
+								   
+		log.info("addAnnonce");
 		int id = this.annonceRemote.getLastId();
-		AnnonceBean annonce = new AnnonceBean(id, (int)Integer.valueOf(id_utilisateur), titre, (double)Double.valueOf(prix),
+		UtilisateurBean user = this.annonceRemote.findUserByPseudo(pseudo);
+		if(user == null) return Response.status(500).entity("").build();
+		
+		
+		AnnonceBean annonce = new AnnonceBean(id, user.getId(), titre, (double)Double.valueOf(prix),
 			description, Type.getType(type).toString());
 		this.annonceRemote.create(annonce);
+		log.info(annonce.toString());
 		return Response.status(200).entity(annonce.toString()).build();
 	}
 
@@ -141,25 +163,21 @@ public class AnnonceWS {
 		this.annonceRemote.edit(annonce);
 		return Response.status(200).entity(annonce.toString()).build();
 	}
-
-	@POST
-	@Path("/rechercheAnnonce")
-	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_FORM_URLENCODED})
-	public String rechercheAnnonce(@FormParam("RECHERCHE") String recherche) throws Exception {
-		List<AnnonceBean> annonces = this.annonceRemote.recherche(recherche);
-		if (annonces != null) {
-			if (!annonces.isEmpty()) {
-				String str = "[";
-				for (int i = 0 ; i < annonces.size(); i++) {
-					str += annonces.get(i).toString();
-					if (i < annonces.size() - 1) str += ",";
-				}
-				str += "]";
-				return str;
-			}
+	
+	@GET
+	@Path("/getTypes")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAnnoncesTypes(){
+		String json = "{\"types\":[";
+		
+		int max = Type.values().length;
+		for(int i=0; i< max; i++){
+			json += "\"" + Type.values()[i] + "\"";
+			if (i < max - 1) json += ",";
 		}
-		return "[]";
+		
+		json += "]}";	
+		return json;
 	}
 
 }
