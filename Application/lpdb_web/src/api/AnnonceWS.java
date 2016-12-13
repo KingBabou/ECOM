@@ -72,13 +72,13 @@ public class AnnonceWS {
 
 		String str = "[";
 		for (int i = 0 ; i < annonces.size(); i++) {
-			str +=  "{ \"id\":" + annonce.getId() +
+			str +=  "{ \"id\":" + annonces.get(i).getId() +
 				", \"pseudo\":\"" + p + "\"" + 
-				", \"titre\":\"" + annonce.getTitre() + "\"" +
-				", \"prix\":\"" + annonce.getPrix() + "\"" +
-				", \"description\":\"" + annonce.getDescription() + "\"" +
-				", \"creation\":\"" + annonce.getCreation() + "\"" +
-				", \"type\":\"" + annonce.getType() + "\"}";
+				", \"titre\":\"" + annonces.get(i).getTitre() + "\"" +
+				", \"prix\":\"" + annonces.get(i).getPrix() + "\"" +
+				", \"description\":\"" + annonces.get(i).getDescription() + "\"" +
+				", \"creation\":\"" + annonces.get(i).getCreation() + "\"" +
+				", \"type\":\"" + annonces.get(i).getType() + "\"}";
 			if (i < annonces.size() - 1) str += ",";
 		}
 		str += "]";

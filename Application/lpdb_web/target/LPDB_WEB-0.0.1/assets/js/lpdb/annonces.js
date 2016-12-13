@@ -47,7 +47,7 @@ function loadUserAnnonces(idTable){
 			var htmlText = "<tr>";
 			htmlText += "<td><img src=\"" + val.image + "\"/></td>";
 			//htmlText += "<td>" + val.titre + "</td>";
-			htmlText += "<td><a href=\"#my_modalAnnonce\" data-toggle=\"modal\" class=\"annonce\" data-identite=" + val.id + " data-price=" + val.prix + " data-localite=" + val.localite + " data-date=" + val.creation + " data-vendeur=" + val.pseudo + " data-description=" + val.description + ">" + val.titre + "</a></td>";
+			htmlText += "<td><a href=\"#my_modalAnnonce\" data-toggle=\"modal\" class=\"annonce\" data-titre=\"" + val.titre + "\" data-identite=\"" + val.id + "\" data-price=\"" + val.prix + "\" data-localite=\"" + val.localite + "\" data-date=\"" + val.creation + "\" data-vendeur=\"" + val.pseudo + "\" data-description=\"" + val.description + "\">" + val.titre + "</a></td>";
 			htmlText += "<td>" + val.prix + "</td>";
 			htmlText += "<td>" + val.localite + "</td>";
 			htmlText += "<td>" + val.creation + "</td>";
@@ -90,7 +90,7 @@ function loadAnnonces(idList, index){
 			var htmlText = "<tr>";
 			htmlText += "<td><img src=\"" + val.image + "\"/></td>";
 			//htmlText += "<td>" + val.titre + "</td>";
-			htmlText += "<td><a href=\"#my_modalAnnonce\" data-toggle=\"modal\" class=\"annonce\" data-titre=" + val.titre + " data-identite=" + val.id + " data-price=" + val.prix + " data-localite=" + val.localite + " data-date=" + val.creation + " data-vendeur=" + val.pseudo + " data-description=" + val.description + ">" + val.titre + "</a></td>";
+			htmlText += "<td><a href=\"#my_modalAnnonce\" data-toggle=\"modal\" class=\"annonce\" data-titre=\"" + val.titre + "\" data-identite=\"" + val.id + "\" data-price=\"" + val.prix + "\" data-localite=\"" + val.localite + "\" data-date=\"" + val.creation + "\" data-vendeur=\"" + val.pseudo + "\" data-description=\"" + val.description + "\">" + val.titre + "</a></td>";
 			htmlText += "<td>" + val.prix + "</td>";
 			htmlText += "<td>" + val.localite + "</td>";
 			htmlText += "<td>" + val.creation + "</td>";
